@@ -2,37 +2,37 @@ const products = [
   {
     name: 'Cashmere Scarves',
     description: 'Lightweight yet warm, hand-woven in traditional and contemporary patterns.',
-    image:`${import.meta.env.BASE_URL}images/scarf.jpeg`,
+    image:`${import.meta.env.BASE_URL}scarf.jpeg`,
     tag: 'Bestseller',
   },
   {
     name: 'Cashmere Sweaters',
     description: 'Classic cuts and modern silhouettes crafted from the finest Himalayan cashmere.',
-    image: `${import.meta.env.BASE_URL}images/sweaters.jpg`,
+    image: `${import.meta.env.BASE_URL}sweaters.jpg`,
     tag: null,
   },
   {
     name: 'Cashmere Blankets',
     description: 'Sumptuous throws that bring warmth and elegance to any living space.',
-    image:  `${import.meta.env.BASE_URL}images/blankets.jpg`,
+    image:  `${import.meta.env.BASE_URL}blankets.jpg`,
     tag: null,
   },
   {
     name: 'Cashmere Beanies',
     description: 'Soft, cozy hats in a range of colors – perfect for cold-weather collections.',
-    image:`${import.meta.env.BASE_URL}images/beanies.jpg`,
+    image:`${import.meta.env.BASE_URL}beanies.jpg`,
     tag: null,
   },
   {
     name: 'Cashmere Wraps',
     description: 'Versatile oversized wraps that drape beautifully over any outfit.',
-    image: `${import.meta.env.BASE_URL}images/wraps.jpg`,
+    image: `${import.meta.env.BASE_URL}wraps.jpg`,
     tag: 'Popular',
   },
   {
     name: 'Custom Orders',
     description: 'Your design, your colors, your label. We manufacture to your specification.',
-    image:`${import.meta.env.BASE_URL}images/custom.jpg`,
+    image:`${import.meta.env.BASE_URL}custom.jpg`,
     tag: 'OEM / Private Label',
   },
 ];
