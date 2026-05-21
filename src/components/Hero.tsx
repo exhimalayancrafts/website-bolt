@@ -3,8 +3,8 @@ export default function Hero() {
     <section id="hero" className="relative min-h-screen flex flex-col">
       <div className="absolute inset-0 overflow-hidden">
         <img
-          src="/WhatsApp_Image_2026-05-21_at_10.37.34_AM.jpeg"
-          alt="Himalayan artisan in the mountains"
+          src="/hero.jpeg"
+          alt="Himalayan goats in the mountains"
           className="w-full h-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-stone-900/70 via-stone-900/40 to-stone-900/80" />
