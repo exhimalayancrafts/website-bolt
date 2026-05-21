@@ -2,37 +2,37 @@ const products = [
   {
     name: 'Cashmere Scarves',
     description: 'Lightweight yet warm, hand-woven in traditional and contemporary patterns.',
-    image: 'https://images.pexels.com/photos/6311392/pexels-photo-6311392.jpeg?auto=compress&cs=tinysrgb&w=800&q=80',
+    image:`${import.meta.env.BASE_URL}images/scarf.jpeg`,
     tag: 'Bestseller',
   },
   {
     name: 'Cashmere Sweaters',
     description: 'Classic cuts and modern silhouettes crafted from the finest Himalayan cashmere.',
-    image: '/WhatsApp_Image_2026-05-21_at_10.37.33_AM.jpeg',
+    image: `${import.meta.env.BASE_URL}images/sweaters.jpg`,
     tag: null,
   },
   {
     name: 'Cashmere Blankets',
     description: 'Sumptuous throws that bring warmth and elegance to any living space.',
-    image: 'https://images.pexels.com/photos/6585601/pexels-photo-6585601.jpeg?auto=compress&cs=tinysrgb&w=800&q=80',
+    image:  `${import.meta.env.BASE_URL}images/blankets.jpg`,
     tag: null,
   },
   {
     name: 'Cashmere Beanies',
     description: 'Soft, cozy hats in a range of colors – perfect for cold-weather collections.',
-    image: 'https://images.pexels.com/photos/5214136/pexels-photo-5214136.jpeg?auto=compress&cs=tinysrgb&w=800&q=80',
+    image:`${import.meta.env.BASE_URL}images/beanies.jpg`,
     tag: null,
   },
   {
     name: 'Cashmere Wraps',
     description: 'Versatile oversized wraps that drape beautifully over any outfit.',
-    image: 'https://images.pexels.com/photos/6311387/pexels-photo-6311387.jpeg?auto=compress&cs=tinysrgb&w=800&q=80',
+    image: `${import.meta.env.BASE_URL}images/wraps.jpg`,
     tag: 'Popular',
   },
   {
     name: 'Custom Orders',
     description: 'Your design, your colors, your label. We manufacture to your specification.',
-    image: 'https://images.pexels.com/photos/3756784/pexels-photo-3756784.jpeg?auto=compress&cs=tinysrgb&w=800&q=80',
+    image:`${import.meta.env.BASE_URL}images/custom.jpg`,
     tag: 'OEM / Private Label',
   },
 ];
