@@ -8,7 +8,7 @@ const products = [
   {
     name: 'Cashmere Sweaters',
     description: 'Classic cuts and modern silhouettes crafted from the finest Himalayan cashmere.',
-    image: 'https://images.pexels.com/photos/5081971/pexels-photo-5081971.jpeg?auto=compress&cs=tinysrgb&w=800&q=80',
+    image: '/WhatsApp_Image_2026-05-21_at_10.37.33_AM.jpeg',
     tag: null,
   },
   {
