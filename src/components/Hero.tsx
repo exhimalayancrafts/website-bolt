@@ -3,7 +3,7 @@ export default function Hero() {
     <section id="hero" className="relative min-h-screen flex flex-col">
       <div className="absolute inset-0 overflow-hidden">
         <img
-          src="/hero.jpg"
+          src={`${import.meta.env.BASE_URL}hero.jpg`}
           alt="Himalayan goats in the mountains"
           className="w-full h-full object-cover object-center"
         />
