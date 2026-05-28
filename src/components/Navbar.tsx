@@ -1,97 +1,89 @@
-import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-
-const links = [
-  { label: 'Products', href: '#products' },
-  { label: 'About', href: '#about' },
-  { label: 'Wholesale', href: '#wholesale' },
-  { label: 'Contact', href: '#contact' },
-];
+import { useState } from 'react';
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  const menuItems = [
+    { label: 'Home', path: '/' },
+    { label: 'Fibers', path: '/fibers' },
+    { label: 'Impact', path: '/impact' },
+    { label: 'About', path: '/about' },
+    { label: 'Events', path: '/events' },
+    { label: 'Products', path: '/products' },
+    { label: 'Contact', path: '/contact' },
+  ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'bg-stone-900/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
-      }`}
-    >
-      <nav className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
-        <a href="#hero" className="flex flex-col leading-none">
-          <span className={`font-serif text-2xl font-light tracking-wide transition-colors duration-300 ${scrolled ? 'text-cream-200' : 'text-cream-100'}`}>
-            Exclusive Crafts
+    <nav className="sticky top-0 z-50 bg-white shadow-sm">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2">
+          <span className="font-serif text-2xl font-light text-stone-900">
+            EXCLUSIVE CRAFTS
           </span>
-          <span className={`font-sans text-[10px] tracking-widest2 uppercase transition-colors duration-300 ${scrolled ? 'text-cashmere-light' : 'text-cream-300'}`}>
-            Kathmandu, Nepal
-          </span>
-        </a>
+        </Link>
 
-        <ul className="hidden md:flex items-center gap-10">
-          {links.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                className={`font-sans text-xs tracking-widest uppercase transition-colors duration-300 hover:text-cashmere-light ${
-                  scrolled ? 'text-cream-300' : 'text-cream-200'
-                }`}
-              >
-                {l.label}
-              </a>
-            </li>
-          ))}
-          <li>
-            <a
-              href="#contact"
-              className="font-sans text-xs tracking-widest uppercase border border-cashmere text-cashmere-light px-5 py-2.5 hover:bg-cashmere hover:text-stone-900 transition-all duration-300"
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-12">
+          {menuItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className="font-sans text-xs tracking-widest uppercase text-stone-700 hover:text-stone-900 transition-colors"
             >
-              Inquire
-            </a>
-          </li>
-        </ul>
+              {item.label}
+            </Link>
+          ))}
+        </div>
 
+        {/* Partner Button */}
+        <Link
+          to="/contact"
+          className="hidden md:inline-block font-sans text-xs tracking-widest uppercase border-2 border-stone-900 text-stone-900 px-6 py-2.5 hover:bg-stone-900 hover:text-white transition-colors"
+        >
+          Partner With Us
+        </Link>
+
+        {/* Mobile Menu Button */}
         <button
-          className={`md:hidden p-2 transition-colors duration-300 ${scrolled ? 'text-cream-200' : 'text-cream-100'}`}
-          onClick={() => setOpen(!open)}
+          className="md:hidden p-2"
+          onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
+          {isOpen ? (
+            <X className="w-6 h-6 text-stone-900" />
+          ) : (
+            <Menu className="w-6 h-6 text-stone-900" />
+          )}
         </button>
-      </nav>
+      </div>
 
-      {open && (
-        <div className="md:hidden bg-stone-900/98 backdrop-blur-sm border-t border-stone-700">
-          <ul className="flex flex-col py-6 px-6 gap-6">
-            {links.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="font-sans text-xs tracking-widest uppercase text-cream-300 hover:text-cashmere-light transition-colors"
-                >
-                  {l.label}
-                </a>
-              </li>
-            ))}
-            <li>
-              <a
-                href="#contact"
-                onClick={() => setOpen(false)}
-                className="inline-block font-sans text-xs tracking-widest uppercase border border-cashmere text-cashmere-light px-5 py-2.5 hover:bg-cashmere hover:text-stone-900 transition-all duration-300"
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-white border-t border-stone-200">
+          <div className="px-6 py-4 space-y-4">
+            {menuItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className="block font-sans text-sm tracking-widest uppercase text-stone-700 hover:text-stone-900 transition-colors"
+                onClick={() => setIsOpen(false)}
               >
-                Inquire
-              </a>
-            </li>
-          </ul>
+                {item.label}
+              </Link>
+            ))}
+            <Link
+              to="/contact"
+              className="block font-sans text-xs tracking-widest uppercase border-2 border-stone-900 text-stone-900 px-6 py-2.5 text-center hover:bg-stone-900 hover:text-white transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              Partner With Us
+            </Link>
+          </div>
         </div>
       )}
-    </header>
+    </nav>
   );
 }

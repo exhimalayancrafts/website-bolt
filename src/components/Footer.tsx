@@ -1,77 +1,103 @@
-import { MessageCircle, Mail } from 'lucide-react';
-
-const WHATSAPP_NUMBER = '9779861397161';
-const EMAIL = 'exhimalayancrafts@gmail.com';
+import { Link } from 'react-router-dom';
+import { Mail, MessageCircle } from 'lucide-react';
 
 export default function Footer() {
+  const quickLinks = [
+    { label: 'About', path: '/about' },
+    { label: 'Fibers', path: '/fibers' },
+    { label: 'Impact', path: '/impact' },
+    { label: 'Events', path: '/events' },
+    { label: 'Products', path: '/products' },
+    { label: 'Contact', path: '/contact' },
+  ];
+
   return (
-    <footer className="bg-stone-900 border-t border-stone-800 py-16 px-6 lg:px-12">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+    <footer className="bg-stone-900 text-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+          {/* Brand */}
           <div>
-            <p className="font-serif text-2xl font-light text-cream-200 mb-2">Exclusive Crafts</p>
-            <p className="font-sans text-[10px] tracking-widest2 uppercase text-cashmere mb-6">
-              Kathmandu, Nepal &nbsp;&middot;&nbsp; Est. 1993
+            <h3 className="font-serif text-2xl font-light text-white mb-4">
+              EXCLUSIVE CRAFTS
+            </h3>
+            <p className="font-sans text-sm text-stone-300 mb-4">
+              Rooted in Himalayan Heritage. Crafted Sustainably.
             </p>
-            <p className="font-sans text-xs font-light text-stone-500 leading-relaxed max-w-xs">
-              Premium wholesale cashmere manufacturer. Handcrafted by Himalayan artisans for over three decades.
+            <p className="font-sans text-xs text-stone-500">
+              Kathmandu, Nepal
             </p>
           </div>
 
+          {/* Quick Links */}
           <div>
-            <p className="font-sans text-[10px] tracking-widest uppercase text-cashmere mb-6">Navigate</p>
+            <h4 className="font-sans text-xs tracking-widest uppercase text-stone-400 mb-6">
+              Quick Links
+            </h4>
             <ul className="space-y-3">
-              {[
-                { label: 'Products', href: '#products' },
-                { label: 'About Us', href: '#about' },
-                { label: 'Wholesale Info', href: '#wholesale' },
-                { label: 'Contact', href: '#contact' },
-              ].map((l) => (
-                <li key={l.href}>
-                  <a
-                    href={l.href}
-                    className="font-sans text-xs font-light text-stone-500 hover:text-cream-300 transition-colors tracking-wide"
+              {quickLinks.map((link) => (
+                <li key={link.path}>
+                  <Link
+                    to={link.path}
+                    className="font-sans text-xs text-stone-400 hover:text-white transition-colors"
                   >
-                    {l.label}
-                  </a>
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
+          {/* About */}
           <div>
-            <p className="font-sans text-[10px] tracking-widest uppercase text-cashmere mb-6">Contact</p>
+            <h4 className="font-sans text-xs tracking-widest uppercase text-stone-400 mb-6">
+              About
+            </h4>
+            <p className="font-sans text-xs text-stone-400 leading-relaxed mb-4">
+              We work with responsibly sourced cashmere, yak wool, sheep wool, and emerging Himalayan plant-based fibers.
+            </p>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-1 font-sans text-xs text-white hover:gap-2 transition-all"
+            >
+              Learn More →
+            </Link>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="font-sans text-xs tracking-widest uppercase text-stone-400 mb-6">
+              Contact
+            </h4>
             <div className="space-y-4">
               <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 group"
+                href="mailto:hello@exclusivecrafts.com"
+                className="flex items-start gap-2 group"
               >
-                <MessageCircle size={14} className="text-[#25D366] flex-shrink-0" />
-                <span className="font-sans text-xs font-light text-stone-500 group-hover:text-cream-300 transition-colors tracking-wide">
-                  +977 9861397161
+                <Mail className="w-4 h-4 text-stone-400 flex-shrink-0 mt-0.5 group-hover:text-white transition-colors" />
+                <span className="font-sans text-xs text-stone-400 group-hover:text-white transition-colors break-all">
+                  hello@exclusivecrafts.com
                 </span>
               </a>
               <a
-                href={`mailto:${EMAIL}`}
-                className="flex items-center gap-3 group"
+                href="tel:+9771234567"
+                className="flex items-start gap-2 group"
               >
-                <Mail size={14} className="text-cashmere flex-shrink-0" />
-                <span className="font-sans text-xs font-light text-stone-500 group-hover:text-cream-300 transition-colors tracking-wide break-all">
-                  {EMAIL}
+                <MessageCircle className="w-4 h-4 text-stone-400 flex-shrink-0 mt-0.5 group-hover:text-white transition-colors" />
+                <span className="font-sans text-xs text-stone-400 group-hover:text-white transition-colors">
+                  +977 (1) 123-4567
                 </span>
               </a>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-stone-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="font-sans text-[10px] text-stone-600 tracking-wide">
+        {/* Bottom */}
+        <div className="border-t border-stone-700 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="font-sans text-xs text-stone-500">
             &copy; {new Date().getFullYear()} Exclusive Crafts. All rights reserved.
           </p>
-          <p className="font-sans text-[10px] text-stone-600 tracking-wide">
-            Handmade in Kathmandu, Nepal
+          <p className="font-sans text-xs text-stone-500">
+            Ethical Himalayan Fibers | Artisan-Centered Production
           </p>
         </div>
       </div>
