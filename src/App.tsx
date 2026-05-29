@@ -2,26 +2,30 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import Fibers from './pages/Fibers';
-import Impact from './pages/Impact';
 import About from './pages/About';
-import Events from './pages/Events';
+import Fibers from './pages/Fibers';
 import Products from './pages/Products';
+import Sourcing from './pages/Sourcing';
+import Manufacturing from './pages/Manufacturing';
+import Community from './pages/Community';
+import Activities from './pages/Activities';
 import Contact from './pages/Contact';
 
 function App() {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-stone-50">
         <Navbar />
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/fibers" element={<Fibers />} />
-            <Route path="/impact" element={<Impact />} />
             <Route path="/about" element={<About />} />
-            <Route path="/events" element={<Events />} />
+            <Route path="/fibers" element={<Fibers />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/sourcing" element={<Sourcing />} />
+            <Route path="/manufacturing" element={<Manufacturing />} />
+            <Route path="/community" element={<Community />} />
+            <Route path="/activities" element={<Activities />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>

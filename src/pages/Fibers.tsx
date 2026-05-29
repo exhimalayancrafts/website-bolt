@@ -1,215 +1,212 @@
-import { Link } from 'react-router-dom';
-import { ChevronRight, ArrowRight } from 'lucide-react';
-import { useState } from 'react';
 import MediaPlaceholder from '../components/MediaPlaceholder';
 
 export default function Fibers() {
-  const [expandedFiber, setExpandedFiber] = useState<string | null>(null);
-
   const fibers = [
     {
-      id: 'cashmere',
       name: 'Cashmere',
-      color: 'terracotta',
-      button: 'Explore Cashmere',
-      details: {
-        subtitle: 'The Luxury of the Himalayas',
-        description: 'Our cashmere comes from high-altitude Himalayan goats, sourced ethically from sustainable farms. Each fiber is hand-selected for softness and quality.',
-        highlights: [
-          'Exceptional softness and fineness',
-          'Superior insulation and warmth',
-          'Responsibly sourced from heritage farms',
-          'Farm story and artisan partnerships',
-        ],
-      },
+      scientificName: 'Capra hircus laniger',
+      origin: 'High-altitude plateaus of the Himalayas',
+      characteristics: [
+        'Ultra-fine diameter (14-16 microns)',
+        'Exceptional softness and drape',
+        'Natural temperature regulation',
+        'Lightweight insulation',
+      ],
+      environment: 'Cashmere goats thrive at elevations above 3,500 meters, where cold winters stimulate the growth of their fine undercoat. The fiber is collected through combing during the spring molt.',
+      traditionalUse: 'Historically reserved for royalty and religious ceremonies, cashmere has been traded along Himalayan routes for centuries.',
     },
     {
-      id: 'yak',
       name: 'Yak Wool',
-      color: 'himalaya',
-      button: 'Learn About Yak Wool',
-      details: {
-        subtitle: 'Ancient Fiber, Sustainable Future',
-        description: 'Yak wool has been used for centuries in Himalayan textiles, offering warmth without the environmental impact of synthetic alternatives.',
-        highlights: [
-          'Naturally warm and durable',
-          'Himalayan-sourced and ethical',
-          'Supports local herding communities',
-          'Climate-appropriate fiber production',
-        ],
-      },
+      scientificName: 'Bos grunniens',
+      origin: 'Tibetan plateau and high Himalayan valleys',
+      characteristics: [
+        'Fine down layer (18-20 microns)',
+        'Highly durable outer coat',
+        'Excellent moisture wicking',
+        'Natural odor resistance',
+      ],
+      environment: 'Yaks are adapted to extreme conditions at 4,000+ meters, developing dual coats for survival. The fine undercoat is harvested during spring, separate from the coarse guard hair.',
+      traditionalUse: 'Tibetan communities have used yak wool for centuries in tents, ropes, and heavy garments suited to harsh mountain climates.',
     },
     {
-      id: 'sheep',
       name: 'Sheep Wool',
-      color: 'spice',
-      button: 'Discover Wool Craftsmanship',
-      details: {
-        subtitle: 'Durability Meets Tradition',
-        description: 'Our sheep wool comes from local Himalayan shepherds, processed through traditional weaving techniques passed down through generations.',
-        highlights: [
-          'Exceptional durability and longevity',
-          'Traditional weaving methods',
-          'Local artisan production',
-          'Sustainable land use practices',
-        ],
-      },
+      scientificName: 'Ovis aries',
+      origin: 'Mountain valleys of Nepal and Tibet',
+      characteristics: [
+        'Variable micron count by breed',
+        'Natural crimp for elasticity',
+        'Good moisture absorption',
+        'Flame resistant properties',
+      ],
+      environment: 'Mountain sheep breeds have adapted to local conditions, producing wool suited to specific climates. Grazing on natural pasture contributes to fiber quality.',
+      traditionalUse: 'Sheep wool forms the backbone of traditional Himalayan textiles — used in rugs, blankets, and everyday clothing across the region.',
     },
     {
-      id: 'allo',
-      name: 'Allo / Himalayan Nettle',
-      color: 'himalaya',
-      button: 'Explore Plant-Based Fibers',
-      details: {
-        subtitle: 'The Future of Natural Fibers',
-        description: 'Himalayan nettle fiber represents an emerging sustainable alternative, requiring minimal input and water while supporting rural communities.',
-        highlights: [
-          'Natural and plant-based fiber source',
-          'Minimal environmental footprint',
-          'Climate-resilient plant species',
-          'Pioneering sustainable production',
-        ],
-      },
+      name: 'Allo (Himalayan Nettle)',
+      scientificName: 'Girardinia diversifolia',
+      origin: 'Mid-hill forests of Nepal',
+      characteristics: [
+        'Long, strong bast fibers',
+        'Natural luster and texture',
+        'Breathable and durable',
+        'Biodegradable',
+      ],
+      environment: 'Allo grows wild in forest understories, requiring no cultivation, irrigation, or chemicals. Harvest involves cutting stems and extracting fiber through traditional retting methods.',
+      traditionalUse: 'Indigenous communities have used allo for generations in fishing nets, bags, and traditional garments. Today, it represents a sustainable fiber future.',
     },
   ];
 
-  const colorMap: Record<string, { bg: string; border: string; text: string; hoverBg: string; badge: string; highlight: string }> = {
-    terracotta: {
-      bg: 'bg-terracotta-50',
-      border: 'border-terracotta-300',
-      text: 'text-terracotta-600',
-      hoverBg: 'hover:bg-terracotta-100',
-      badge: 'bg-terracotta-100 text-terracotta-700',
-      highlight: 'text-terracotta-500',
-    },
-    himalaya: {
-      bg: 'bg-himalaya-50',
-      border: 'border-himalaya-300',
-      text: 'text-himalaya-600',
-      hoverBg: 'hover:bg-himalaya-100',
-      badge: 'bg-himalaya-100 text-himalaya-700',
-      highlight: 'text-himalaya-500',
-    },
-    spice: {
-      bg: 'bg-spice-50',
-      border: 'border-spice-300',
-      text: 'text-spice-600',
-      hoverBg: 'hover:bg-spice-100',
-      badge: 'bg-spice-100 text-spice-700',
-      highlight: 'text-spice-500',
-    },
-  };
-
   return (
-    <div>
-      {/* Page Header */}
-      <section className="relative bg-gradient-to-br from-himalaya-50 via-cream-100 to-terracotta-50 py-20 px-6 lg:px-12 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 right-20 w-72 h-72 bg-himalaya-300 rounded-full blur-3xl" />
-        </div>
-        <div className="relative max-w-7xl mx-auto">
-          <p className="font-sans text-xs tracking-widest uppercase text-himalaya-600 mb-4">
-            Natural Materials
+    <div className="bg-stone-50">
+      {/* Header */}
+      <section className="py-24 px-6 lg:px-12 border-b border-stone-200">
+        <div className="max-w-6xl mx-auto">
+          <p className="font-sans text-[10px] tracking-widest uppercase text-stone-500 mb-6">
+            Materials Archive
           </p>
-          <h1 className="font-serif text-5xl md:text-6xl font-semibold text-sand-900 mb-6">
-            Our Fibers
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-stone-900 mb-8 leading-tight">
+            Fibers
           </h1>
-          <p className="font-sans text-lg text-sand-600 max-w-2xl">
-            Discover the premium natural fibers we work with, each selected for sustainability, quality, and heritage.
+          <p className="font-sans text-sm text-stone-600 max-w-2xl leading-relaxed">
+            The raw materials we work with — their origins, characteristics, and the environments that shape them.
           </p>
         </div>
       </section>
 
-      {/* Fibers Grid */}
-      <section className="bg-white py-28 px-6 lg:px-12">
-        <div className="max-w-7xl mx-auto space-y-20">
-          {fibers.map((fiber) => {
-            const colors = colorMap[fiber.color];
-            return (
-              <div key={fiber.id} className={`rounded-3xl ${colors.bg} ${colors.border} border-2 p-8 md:p-12 transition-all duration-300`}>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                  <div>
-                    <span className={`inline-block font-sans text-xs tracking-widest uppercase ${colors.badge} px-4 py-1.5 rounded-full mb-6`}>
-                      {fiber.details.subtitle}
-                    </span>
-                    <h2 className="font-serif text-4xl md:text-5xl font-semibold text-sand-900 mb-6">
-                      {fiber.name}
-                    </h2>
+      {/* Fiber Sections */}
+      {fibers.map((fiber, index) => (
+        <section
+          key={fiber.name}
+          className={`py-32 px-6 lg:px-12 ${index % 2 === 1 ? 'bg-stone-100' : 'bg-stone-50'}`}
+        >
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+              {/* Images */}
+              <div className={`lg:col-span-6 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+                <MediaPlaceholder
+                  type="image"
+                  label={`${fiber.name} — landscape and origin environment`}
+                  aspect="aspect-[4/3]"
+                  className="rounded-sm mb-6"
+                />
+                <MediaPlaceholder
+                  type="image"
+                  label={`${fiber.name} fiber — macro detail, texture study`}
+                  aspect="aspect-square"
+                  className="rounded-sm"
+                />
+              </div>
 
-                    {expandedFiber === fiber.id && (
-                      <div className="mb-6 space-y-4 animate-in">
-                        <p className="font-sans text-base text-sand-600 leading-relaxed">
-                          {fiber.details.description}
-                        </p>
-                        <ul className="space-y-3">
-                          {fiber.details.highlights.map((highlight, idx) => (
-                            <li key={idx} className="flex items-start gap-3">
-                              <span className={`${colors.highlight} text-lg leading-none mt-0.5`}>✦</span>
-                              <span className="font-sans text-sm text-sand-700">{highlight}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
+              {/* Content */}
+              <div className={`lg:col-span-5 ${index % 2 === 1 ? 'lg:order-1 lg:col-start-1' : 'lg:col-start-7'}`}>
+                <p className="font-sans text-[10px] tracking-widest uppercase text-stone-400 mb-2">
+                  {fiber.scientificName}
+                </p>
+                <h2 className="font-serif text-3xl md:text-4xl font-light text-stone-900 mb-6">
+                  {fiber.name}
+                </h2>
+                <p className="font-sans text-xs text-stone-500 mb-10">
+                  {fiber.origin}
+                </p>
 
-                    <button
-                      onClick={() => setExpandedFiber(expandedFiber === fiber.id ? null : fiber.id)}
-                      className={`inline-flex items-center gap-2 font-sans text-xs tracking-widest uppercase ${colors.text} hover:gap-3 transition-all`}
-                    >
-                      {fiber.button}
-                      <ChevronRight className={`w-4 h-4 transition-transform ${expandedFiber === fiber.id ? 'rotate-90' : ''}`} />
-                    </button>
-                  </div>
+                <div className="mb-10">
+                  <p className="font-sans text-[10px] tracking-widest uppercase text-stone-400 mb-4">
+                    Characteristics
+                  </p>
+                  <ul className="space-y-2">
+                    {fiber.characteristics.map((char) => (
+                      <li key={char} className="font-sans text-sm text-stone-600">
+                        {char}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-                  <MediaPlaceholder
-                    type="image"
-                    label={`${fiber.name} — sourcing & production`}
-                    aspect="aspect-[4/3]"
-                    className="rounded-2xl"
-                  />
+                <div className="mb-10">
+                  <p className="font-sans text-[10px] tracking-widest uppercase text-stone-400 mb-4">
+                    Environment
+                  </p>
+                  <p className="font-sans text-sm text-stone-600 leading-relaxed">
+                    {fiber.environment}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="font-sans text-[10px] tracking-widest uppercase text-stone-400 mb-4">
+                    Traditional Relevance
+                  </p>
+                  <p className="font-sans text-sm text-stone-600 leading-relaxed">
+                    {fiber.traditionalUse}
+                  </p>
                 </div>
               </div>
-            );
-          })}
-        </div>
-      </section>
+            </div>
+          </div>
+        </section>
+      ))}
 
-      {/* Video Section */}
-      <section className="bg-cream-100 py-20 px-6 lg:px-12">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="font-sans text-xs tracking-widest uppercase text-terracotta-500 mb-4">
-              See It In Action
+      {/* Material Studies Gallery */}
+      <section className="py-32 px-6 lg:px-12 bg-stone-900 text-stone-100">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-16">
+            <p className="font-sans text-[10px] tracking-widest uppercase text-stone-400 mb-6">
+              Material Studies
             </p>
-            <h2 className="font-serif text-4xl font-semibold text-sand-900">
-              From Fiber to Fabric
+            <h2 className="font-serif text-2xl md:text-3xl font-light text-stone-100">
+              Fiber in detail
             </h2>
           </div>
-          <MediaPlaceholder
-            type="video"
-            label="Documentary: From fiber to finished product"
-            aspect="aspect-video"
-            className="rounded-2xl shadow-xl"
-          />
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <MediaPlaceholder
+              type="image"
+              label="Cashmere fiber microscopic"
+              aspect="aspect-square"
+              className="rounded-sm opacity-70"
+            />
+            <MediaPlaceholder
+              type="image"
+              label="Yak wool texture close-up"
+              aspect="aspect-square"
+              className="rounded-sm opacity-70"
+            />
+            <MediaPlaceholder
+              type="image"
+              label="Sheep wool crimp detail"
+              aspect="aspect-square"
+              className="rounded-sm opacity-70"
+            />
+            <MediaPlaceholder
+              type="image"
+              label="Allo fiber structure"
+              aspect="aspect-square"
+              className="rounded-sm opacity-70"
+            />
+          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-gradient-to-r from-himalaya-800 to-himalaya-900 py-20 px-6 lg:px-12">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-serif text-4xl font-semibold text-white mb-6">
-            Ready to Partner With Us?
-          </h2>
-          <p className="font-sans text-lg text-himalaya-200 mb-8">
-            Whether you're a designer, manufacturer, or retailer, we offer premium fibers sourced with integrity.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 font-sans text-sm tracking-widest uppercase bg-terracotta-500 text-white px-8 py-4 rounded-lg hover:bg-terracotta-400 transition-colors shadow-lg"
-          >
-            Get In Touch
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+      {/* Climate Context */}
+      <section className="py-32 px-6 lg:px-12">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            <div className="lg:col-span-4">
+              <p className="font-sans text-[10px] tracking-widest uppercase text-stone-500 mb-6">
+                Climate Resilience
+              </p>
+            </div>
+            <div className="lg:col-span-7">
+              <h2 className="font-serif text-xl md:text-2xl font-light text-stone-900 mb-8 leading-snug">
+                Natural fibers adapted to harsh conditions.
+              </h2>
+              <p className="font-sans text-sm text-stone-600 leading-relaxed mb-6">
+                The fibers we work with evolved in some of the world's most challenging environments. This makes them inherently resilient — capable of withstanding extreme cold, regulating temperature, and lasting for decades with proper care.
+              </p>
+              <p className="font-sans text-sm text-stone-600 leading-relaxed">
+                As climate patterns shift, these time-tested materials offer a sustainable alternative to petroleum-based synthetics. Natural fibers biodegrade at end of life, returning to the soil rather than accumulating as waste.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </div>
