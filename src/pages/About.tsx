@@ -161,11 +161,10 @@ export default function About() {
       <section className="py-32 px-6 lg:px-12">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <MediaPlaceholder
-              type="image"
-              label="Kathmandu office or facility exterior"
-              aspect="aspect-[4/3]"
-              className="rounded-sm"
+            <img
+              src="/images/office.jpg"
+              alt="Kathmandu office"
+              className="aspect-[4/3] object-cover rounded-sm w-full"
             />
             <div className="flex flex-col justify-center">
               <p className="font-sans text-[10px] tracking-widest uppercase text-stone-500 mb-6">
