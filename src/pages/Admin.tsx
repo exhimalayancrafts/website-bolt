@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { supabase, getPublicUrl, BUCKET } from '../lib/supabase';
 import { IMAGE_SLOTS, type ImageSlot } from '../lib/imageSlots';
-import { Upload, Trash2, CheckCircle, AlertCircle, Loader } from 'lucide-react';
+import { Upload, Trash2, CheckCircle, AlertCircle, Loader, Lock } from 'lucide-react';
 
 interface UploadedImage {
   id: string;
@@ -14,8 +14,57 @@ interface UploadedImage {
 type Status = { type: 'success' | 'error'; message: string } | null;
 
 const PAGES = [...new Set(IMAGE_SLOTS.map((s) => s.page))];
+const ADMIN_PASSWORD = 'exclusivecrafts2024';
+
+function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
+  const [value, setValue] = useState('');
+  const [error, setError] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (value === ADMIN_PASSWORD) {
+      sessionStorage.setItem('admin_auth', '1');
+      onUnlock();
+    } else {
+      setError(true);
+      setValue('');
+      setTimeout(() => setError(false), 2000);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-stone-900 flex items-center justify-center px-6">
+      <div className="w-full max-w-sm">
+        <div className="flex justify-center mb-8">
+          <Lock className="w-7 h-7 text-stone-400" />
+        </div>
+        <p className="font-serif text-xl font-light text-stone-100 text-center mb-8">Admin Access</p>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <input
+            type="password"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            placeholder="Password"
+            autoFocus
+            className={`w-full bg-transparent border-b py-3 font-sans text-base text-stone-100 placeholder-stone-600 focus:outline-none transition-colors ${
+              error ? 'border-red-500' : 'border-stone-600 focus:border-stone-300'
+            }`}
+          />
+          {error && <p className="font-sans text-sm text-red-400">Incorrect password</p>}
+          <button
+            type="submit"
+            className="w-full font-sans text-sm text-stone-400 hover:text-stone-100 border border-stone-700 hover:border-stone-400 py-3 transition-colors"
+          >
+            Enter
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
 
 export default function Admin() {
+  const [authed, setAuthed] = useState(() => sessionStorage.getItem('admin_auth') === '1');
   const [uploaded, setUploaded] = useState<UploadedImage[]>([]);
   const [activePage, setActivePage] = useState(PAGES[0]);
   const [uploading, setUploading] = useState<string | null>(null);
@@ -25,8 +74,10 @@ export default function Admin() {
   const pendingSlot = useRef<ImageSlot | null>(null);
 
   useEffect(() => {
-    fetchImages();
-  }, []);
+    if (authed) fetchImages();
+  }, [authed]);
+
+  if (!authed) return <PasswordGate onUnlock={() => setAuthed(true)} />;
 
   async function fetchImages() {
     const { data } = await supabase.from('site_images').select('*');
