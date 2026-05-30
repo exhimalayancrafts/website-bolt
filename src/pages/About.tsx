@@ -1,10 +1,10 @@
 export default function About() {
   const milestones = [
     { year: '1998', title: 'Founding', description: 'Established in Kathmandu with a focus on cashmere export and direct sourcing relationships.' },
-    { year: '2005', title: 'First Manufacturing Facility', description: 'Acquired weaving workshop in Lalitpur, bringing production under direct oversight.' },
-    { year: '2012', title: 'Yak Wool Development', description: 'Began systematic development of yak wool as a premium textile fiber.' },
-    { year: '2018', title: 'Allo Research Program', description: 'Initiated research into Himalayan nettle fiber with agricultural partners.' },
-    { year: '2023', title: 'Current Operations', description: 'Working with 200+ artisans across four fiber types, serving partners globally.' },
+    { year: 'Early Growth', title: 'International Market Development', description: 'Expanded global presence through participation in major international trade fairs across North America, Europe, and Asia, including AmericasMart Atlanta, ASD Market Week Las Vegas, Off Price Show Las Vegas, LA Mart Los Angeles, Sourcing at MAGIC New York, CNE Toronto, MUBA Basel, California Gift Show, San Francisco International Gift Fair, and numerous European trade exhibitions.' },
+    { year: '2021', title: 'Cashmere Processing Development', description: 'Became part of Nepal\'s first cashmere fiber processing initiative, allowing Chyangra Pashmina to be sourced and processed domestically.' },
+    { year: '2024', title: 'Natural Fiber Expansion', description: 'Expanded sourcing and product development across a broader range of plant based fibers, including himalayan nettle(allo) and hemp.' },
+    { year: '2023', title: 'Current Operations', description: 'Providing sourcing, development, manufacturing, and export solutions across cashmere and other Himalayan natural fibers for clients around the world.' },
   ];
 
   return (
@@ -19,7 +19,7 @@ export default function About() {
             The Company
           </h1>
           <p className="font-sans text-sm text-stone-600 max-w-2xl leading-relaxed">
-            A family-run business built on generations of experience in Himalayan textile production, maintaining direct relationships from grazing lands to finished goods.
+            A family-run business with experience in Himalayan textile production, maintaining direct relationships from grazing lands to finished goods.
           </p>
         </div>
       </section>
@@ -37,18 +37,26 @@ export default function About() {
               <img
                 src="/website-bolt/Founder.jpeg"
                 alt="Founder"
-                className= "aspect-[4/5] object-cover rounded-sm mb-12 w-full"
+                className="aspect-[4/5] object-cover rounded-sm mb-12 w-full max-w-sm"
               />
               <div className="space-y-6">
                 <p className="font-sans text-sm text-stone-600 leading-relaxed">
-                  The company was founded by a family with deep roots in Himalayan textile traditions. Before starting Exclusive Crafts, the founders spent two decades working with cashmere traders, learning the complexities of fiber quality, and building relationships with herding communities across the high plateaus.
+                  Dhan Prasad Lamichhane founded Exclusive Crafts, formerly known as Mount Manaslu Pashmina Industry, in 1998, starting with cashmere export and building direct relationships with clients across the world. Over 25 years the business has grown into a trusted supplier to international brands worldwide.
                 </p>
                 <p className="font-sans text-sm text-stone-600 leading-relaxed">
-                  This experience shaped a conviction: that quality textiles require direct oversight from source to finish. No middlemen. No fragmented supply chains. Complete traceability.
+                  He established Nepal's first cashmere dehairing facility through NFPPL (Nepal Fibre Processing Private Limited), with support from ITC's EU-Nepal Trade and Investment Programme. The facility was built with a single goal: to allow Nepalese cashmere to be processed locally and reach world markets on its own terms.
                 </p>
                 <p className="font-sans text-sm text-stone-600 leading-relaxed">
-                  Today, the company remains family-run. Decisions are made with a long view — favoring relationships over transactions, sustainability over rapid growth, and craft over commodity.
+                  His background is in dyeing with a long focus on vegetable dye techniques. Since 2002 he has been involved in promoting Nepalese handicrafts internationally. He currently serves as President of Nepal Pashmina Industries Association, is a founding member of NFPPL, and sits on the board of the Federation of Handicrafts Associations of Nepal. He also founded Jorpati Lions Academy, a school for underprivileged children in Kathmandu.
                 </p>
+                
+                  href="https://www.intracen.org/news-and-events/news/pashmina-from-nepal-a-unique-product-ready-to-embrace-international-markets"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-sans text-sm text-stone-900 underline underline-offset-4 hover:text-stone-600"
+                >
+                  Read more about Dhan's work in pashmina →
+                </a>
               </div>
             </div>
           </div>
@@ -66,28 +74,25 @@ export default function About() {
             </div>
             <div className="lg:col-span-7">
               <h2 className="font-serif text-2xl md:text-3xl font-light text-stone-900 mb-12 leading-snug">
-                Three principles guide our work.
+                How we work.
               </h2>
-
               <div className="space-y-12">
                 <div className="border-l border-stone-400 pl-8">
                   <h3 className="font-serif text-lg font-medium text-stone-900 mb-4">Direct Relationships</h3>
                   <p className="font-sans text-sm text-stone-600 leading-relaxed">
-                    We work directly with herders and artisans, maintaining personal knowledge of the people and places behind our fibers. This allows genuine traceability and fair terms.
+                    We work directly with herders and artisans, maintaining personal knowledge of the people and places behind our fibers.
                   </p>
                 </div>
-
                 <div className="border-l border-stone-400 pl-8">
                   <h3 className="font-serif text-lg font-medium text-stone-900 mb-4">Owned Production</h3>
                   <p className="font-sans text-sm text-stone-600 leading-relaxed">
-                    We own our facilities. This is not common in this industry, but it ensures quality control, fair working conditions, and the ability to innovate without compromise.
+                    We own our facilities, which means we are responsible for everything that happens — the quality, the working conditions, the process.
                   </p>
                 </div>
-
                 <div className="border-l border-stone-400 pl-8">
-                  <h3 className="font-serif text-lg font-medium text-stone-900 mb-4">Long-Term Thinking</h3>
+                  <h3 className="font-serif text-lg font-medium text-stone-900 mb-4">Experience</h3>
                   <p className="font-sans text-sm text-stone-600 leading-relaxed">
-                    Decisions are measured against decades, not quarters. We invest in soil health, animal welfare, and artisan skills knowing the returns take years to materialize.
+                    Dhan has been working with pashmina since he was a teenager. That kind of experience is not something you can shortcut.
                   </p>
                 </div>
               </div>
@@ -107,7 +112,6 @@ export default function About() {
               Company evolution
             </h2>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-stone-300">
             {milestones.map((milestone) => (
               <div key={milestone.year} className="bg-stone-50 p-10 min-h-[200px]">
@@ -135,19 +139,19 @@ export default function About() {
             </div>
             <div className="lg:col-span-7">
               <h2 className="font-serif text-2xl md:text-3xl font-light text-stone-100 mb-12 leading-snug">
-                Long-standing involvement in the textile ecosystem.
+                Industry involvement.
               </h2>
               <div className="space-y-8">
                 <p className="font-sans text-sm text-stone-300 leading-relaxed">
-                  Over 25 years, we have built relationships across the global textile industry — participating in trade associations, contributing to sustainability standards, and collaborating with research institutions on fiber development.
+                  Over 25 years, we have built relationships across the global textile industry through trade associations, international exhibitions, and direct collaboration with industry bodies.
                 </p>
                 <div className="space-y-4 pt-8 border-t border-stone-700">
                   <p className="font-sans text-xs text-stone-400">Active membership and participation in:</p>
                   <ul className="space-y-2">
-                    <li className="font-sans text-sm text-stone-300">Nepal Cashmere Industries Association</li>
-                    <li className="font-sans text-sm text-stone-300">Himalayan Wool Development Board</li>
-                    <li className="font-sans text-sm text-stone-300">International Natural Fiber Organization</li>
-                    <li className="font-sans text-sm text-stone-300">Fair Trade Fiber Collective</li>
+                    <li className="font-sans text-sm text-stone-300">Nepal Pashmina Industries Association</li>
+                    <li className="font-sans text-sm text-stone-300">Nepal Fibre Processing Private Limited (NFPPL)</li>
+                    <li className="font-sans text-sm text-stone-300">Federation of Handicrafts Associations of Nepal</li>
+                    <li className="font-sans text-sm text-stone-300">Federation of Nepalese Chambers of Commerce & Industries</li>
                   </ul>
                 </div>
               </div>
@@ -170,11 +174,11 @@ export default function About() {
                 Location
               </p>
               <h2 className="font-serif text-2xl md:text-3xl font-light text-stone-900 mb-8 leading-snug">
-                Based in Kathmandu, Nepal
+                Based in Gokarneshwor-06, Jorpati, Kathmandu, Nepal
               </h2>
               <p className="font-sans text-sm text-stone-600 leading-relaxed">
-                Our headquarters and primary manufacturing operations are in Kathmandu Valley. This location keeps us close to herding regions in the north, connected to the broader Himalayan textile network, and accessible to international partners.
-              </p>
+                  Our office and primary manufacturing operations are in Kathmandu Valley. We also run a cashmere farm in Mustang where our fiber sourcing begins.
+ 
             </div>
           </div>
         </div>
