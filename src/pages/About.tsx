@@ -1,5 +1,3 @@
-import MediaPlaceholder from '../components/MediaPlaceholder';
-
 export default function About() {
   const milestones = [
     { year: '1998', title: 'Founding', description: 'Established in Kathmandu with a focus on cashmere export and direct sourcing relationships.' },
@@ -36,11 +34,11 @@ export default function About() {
               </p>
             </div>
             <div className="lg:col-span-7">
-              <MediaPlaceholder
-                type="image"
-                label="Founder portrait — documentary style, workshop context"
+              <img
+                src="/image/founder.jpg"
+                alt="Founder"
                 aspect="aspect-[4/5]"
-                className="rounded-sm mb-12"
+                className= "aspect-[4/5] object-cover rounded-sm mb-12 w-full"
               />
               <div className="space-y-6">
                 <p className="font-sans text-sm text-stone-600 leading-relaxed">
