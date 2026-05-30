@@ -40,22 +40,21 @@ export default function About() {
               />
               <div className="space-y-6">
                 <p className="font-sans text-sm text-stone-600 leading-relaxed">
-                  Dhan Prasad Lamichhane founded Exclusive Crafts, formerly known as Mount Manaslu Pashmina Industry, in 1998, starting with cashmere export and building direct relationships with clients across the world. 
-                  Over 25 years the business has grown into a trusted supplier to international brands worldwide.
+                  Dhan Prasad Lamichhane founded Exclusive Crafts, formerly known as Mount Manaslu Pashmina Industry, in 1998, starting with cashmere export and building direct relationships with clients across the world. Over 25 years the business has grown into a trusted supplier to international brands worldwide.
                 </p>
                 <p className="font-sans text-sm text-stone-600 leading-relaxed">
                   He established Nepal's first cashmere dehairing facility through NFPPL (Nepal Fibre Processing Private Limited) , with support from ITC's EU-Nepal Trade and Investment Programme. The facility was built with a single goal: to allow Nepalese cashmere to be processed locally and reach world markets on its own terms.
+                </p> 
                 <p className="font-sans text-sm text-stone-600 leading-relaxed">
                  His background is in dyeing with a long focus on vegetable dye techniques. Since 2002 he has been involved in promoting Nepalese handicrafts internationally. He currently serves as a President of Nepal Pashmina Industries Association, is a founding member of NFPPL, and sits on the board of the Federation of Handicrafts Associations of Nepal. He also founded Jorpati Lions Academy, a school for underprivileged children in Kathmandu.
-                </p>
-                  
-                  href="https://www.intracen.org/news-and-events/news/pashmina-from-nepal-a-unique-product-ready-to-embrace-international-markets"
+                </p> 
+                  <a href="https://www.intracen.org/news-and-events/news/pashmina-from-nepal-a-unique-product-ready-to-embrace-international-markets"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-sans text-sm text-stone-900 underline underline-offset-4 hover:text-stone-600"
-              >
+                >
                   Read more about Dhan's work in pashmina →
-                </a>
+                  </a>
               </div>
             </div>
           </div>
@@ -150,10 +149,10 @@ export default function About() {
                 <div className="space-y-4 pt-8 border-t border-stone-700">
                   <p className="font-sans text-xs text-stone-400">Active membership and participation in:</p>
                   <ul className="space-y-2">
-                    <li className="font-sans text-sm text-stone-300">Nepal Cashmere Industries Association</li>
-                    <li className="font-sans text-sm text-stone-300">Himalayan Wool Development Board</li>
-                    <li className="font-sans text-sm text-stone-300">International Natural Fiber Organization</li>
-                    <li className="font-sans text-sm text-stone-300">Fair Trade Fiber Collective</li>
+                    <li className="font-sans text-sm text-stone-300">Nepal Pashmina Industries Association (NPIA)</li>
+                    <li className="font-sans text-sm text-stone-300">Nepal Fibre Processing Private Limited (NFPPL)</li>
+                    <li className="font-sans text-sm text-stone-300">Federation of Handicrafts Associations of Nepal(FHAN)</li>
+                    <li className="font-sans text-sm text-stone-300">Federation of Nepalese Chambers of Commerce & Industries(FNCCI)</li>
                   </ul>
                 </div>
               </div>
