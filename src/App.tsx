@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route, Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -12,35 +12,36 @@ import Activities from './pages/Activities';
 import Contact from './pages/Contact';
 import Admin from './pages/Admin';
 
+function Layout() {
+  return (
+    <div className="min-h-screen flex flex-col bg-stone-50">
+      <Navbar />
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
 function App() {
   return (
-    <Router>
+    <HashRouter>
       <Routes>
         <Route path="/admin" element={<Admin />} />
-        <Route
-          path="/*"
-          element={
-            <div className="min-h-screen flex flex-col bg-stone-50">
-              <Navbar />
-              <main className="flex-1">
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/fibers" element={<Fibers />} />
-                  <Route path="/products" element={<Products />} />
-                  <Route path="/sourcing" element={<Sourcing />} />
-                  <Route path="/manufacturing" element={<Manufacturing />} />
-                  <Route path="/community" element={<Community />} />
-                  <Route path="/activities" element={<Activities />} />
-                  <Route path="/contact" element={<Contact />} />
-                </Routes>
-              </main>
-              <Footer />
-            </div>
-          }
-        />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/fibers" element={<Fibers />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/sourcing" element={<Sourcing />} />
+          <Route path="/manufacturing" element={<Manufacturing />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/activities" element={<Activities />} />
+          <Route path="/contact" element={<Contact />} />
+        </Route>
       </Routes>
-    </Router>
+    </HashRouter>
   );
 }
 
