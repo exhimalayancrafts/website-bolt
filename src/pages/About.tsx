@@ -35,7 +35,7 @@ export default function About() {
             </div>
             <div className="lg:col-span-7">
               <img
-                src="/image/founder.jpg"
+                src="/Founder.jpeg"
                 alt="Founder"
                 aspect="aspect-[4/5]"
                 className= "aspect-[4/5] object-cover rounded-sm mb-12 w-full"
@@ -162,7 +162,7 @@ export default function About() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <img
-              src="/images/office.jpg"
+              src="/office.jpg"
               alt="Kathmandu office"
               className="aspect-[4/3] object-cover rounded-sm w-full"
             />
