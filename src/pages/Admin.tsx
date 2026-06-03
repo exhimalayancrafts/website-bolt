@@ -14,7 +14,7 @@ interface SavedLink { id: string; page: string; slot: string; href: string; link
 type Status = { type: 'success' | 'error'; message: string } | null;
 type Tab = 'images' | 'texts' | 'videos' | 'links';
 
-const ADMIN_PASSWORD = 'exclusivecrafts2024';
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD as string;
 const IMAGE_PAGES = [...new Set(IMAGE_SLOTS.map((s) => s.page))];
 const TEXT_PAGES  = [...new Set(TEXT_SLOTS.map((s) => s.page))];
 const VIDEO_PAGES = [...new Set(VIDEO_SLOTS.map((s) => s.page))];

@@ -8,6 +8,13 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
+    <!-- Security headers via meta tags (GitHub Pages fallback — proper headers via _headers / vercel.json) -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://flbkuzoievjutsziablq.supabase.co https://images.pexels.com; connect-src 'self' https://flbkuzoievjutsziablq.supabase.co https://www.google-analytics.com; frame-src https://www.youtube.com https://player.vimeo.com; object-src 'none'; base-uri 'self'; form-action 'self';" />
+
     <!-- Default title & description (overridden per-page by PageMeta) -->
     <title>Exclusive Crafts — Himalayan Cashmere &amp; Fine Textiles</title>
     <meta name="description" content="Premium Himalayan fiber company producing cashmere, yak wool, sheep wool, and allo textiles from Kathmandu, Nepal since 1993." />

@@ -42,7 +42,8 @@ export default function SiteLink({ page, slot, defaultHref, defaultLinkText, cla
 
   const { href, link_text, opens_new_tab } = record;
 
-  if (!href) return null;
+  // Block dangerous URL schemes
+  if (!href || /^javascript:/i.test(href) || /^data:/i.test(href)) return null;
 
   const isExternal = /^https?:\/\//.test(href);
 

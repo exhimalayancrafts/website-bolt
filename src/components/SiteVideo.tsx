@@ -14,6 +14,9 @@ interface VideoRecord {
 function getEmbedUrl(url: string): { type: 'youtube' | 'vimeo' | 'direct'; src: string } | null {
   if (!url) return null;
 
+  // Block dangerous URL schemes — only allow https
+  if (!/^https:\/\//i.test(url)) return null;
+
   // YouTube: watch?v=ID or youtu.be/ID or /embed/ID
   const ytMatch = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
   if (ytMatch) {
