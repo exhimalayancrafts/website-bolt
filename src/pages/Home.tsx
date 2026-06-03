@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import SiteImage from '../components/SiteImage';
 import SiteText from '../components/SiteText';
+import SiteVideo from '../components/SiteVideo';
+import SiteLink from '../components/SiteLink';
 
 export default function Home() {
   return (
@@ -114,6 +116,8 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          {/* Optional process reel video */}
+          <SiteVideo page="home" slot="process-reel" className="mt-12 max-w-4xl mx-auto" />
         </div>
       </section>
 
@@ -179,6 +183,12 @@ export default function Home() {
           <p className="font-sans text-base text-stone-600 leading-relaxed">
             Exclusive Crafts works at the intersection of landscape, fiber, and human skill — producing textiles that reflect the integrity of their origin.
           </p>
+          <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
+            <SiteLink page="home" slot="cta-primary" defaultHref="/products" defaultLinkText="View Products"
+              className="font-sans text-sm text-stone-100 bg-stone-900 hover:bg-stone-700 transition-colors px-6 py-3" />
+            <SiteLink page="home" slot="cta-secondary" defaultHref="/about" defaultLinkText="Our Story"
+              className="font-sans text-sm text-stone-700 hover:text-stone-900 border border-stone-400 hover:border-stone-700 transition-colors px-6 py-3" />
+          </div>
         </div>
       </section>
     </div>

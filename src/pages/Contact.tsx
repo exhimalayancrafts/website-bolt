@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import SiteImage from '../components/SiteImage';
 import SiteText from '../components/SiteText';
+import SiteLink from '../components/SiteLink';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', company: '', role: '', interest: '', message: '' });
@@ -109,6 +110,15 @@ export default function Contact() {
                 <div>
                   <p className="font-sans text-[10px] tracking-widest uppercase text-stone-400 mb-3">Response</p>
                   <p className="font-sans text-base text-stone-600">We respond within 2–3 business days.</p>
+                </div>
+                {/* Social links — shown only when URLs are set in admin */}
+                <div className="flex flex-col gap-2">
+                  <SiteLink page="contact" slot="instagram" defaultHref="" defaultLinkText="Instagram"
+                    className="font-sans text-sm text-stone-600 hover:text-stone-900 transition-colors" />
+                  <SiteLink page="contact" slot="linkedin" defaultHref="" defaultLinkText="LinkedIn"
+                    className="font-sans text-sm text-stone-600 hover:text-stone-900 transition-colors" />
+                  <SiteLink page="contact" slot="whatsapp" defaultHref="" defaultLinkText="WhatsApp"
+                    className="font-sans text-sm text-stone-600 hover:text-stone-900 transition-colors" />
                 </div>
               </div>
             </div>

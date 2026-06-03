@@ -1,5 +1,7 @@
 import SiteImage from '../components/SiteImage';
 import SiteText from '../components/SiteText';
+import SiteVideo from '../components/SiteVideo';
+import SiteLink from '../components/SiteLink';
 
 export default function Activities() {
   const events = [
@@ -73,6 +75,14 @@ export default function Activities() {
             ))}
           </div>
           <SiteImage page="activities" slot="trade-fair" fallbackLabel="Trade fair booth" aspect="aspect-video" className="rounded-sm" />
+          {/* Trade fair reel video — shown if a URL is added in admin */}
+          <SiteVideo page="activities" slot="trade-fair-reel" className="mt-6" />
+          <div className="flex flex-wrap gap-4 mt-6">
+            <SiteLink page="activities" slot="event-1-link" defaultHref="" defaultLinkText="Learn More"
+              className="font-sans text-sm text-stone-700 hover:text-stone-900 transition-colors" />
+            <SiteLink page="activities" slot="event-2-link" defaultHref="" defaultLinkText="Learn More"
+              className="font-sans text-sm text-stone-700 hover:text-stone-900 transition-colors" />
+          </div>
         </div>
       </section>
 
@@ -133,6 +143,14 @@ export default function Activities() {
             <SiteImage page="activities" slot="event-1" fallbackLabel="Exhibition opening" aspect="aspect-[4/3]" className="rounded-sm opacity-70" />
             <SiteImage page="activities" slot="event-2" fallbackLabel="Panel discussion" aspect="aspect-[4/3]" className="rounded-sm opacity-70" />
             <SiteImage page="activities" slot="event-3" fallbackLabel="Workshop session" aspect="aspect-[4/3]" className="rounded-sm opacity-70" />
+          </div>
+          {/* Optional panel recording video */}
+          <SiteVideo page="activities" slot="panel-recording" className="mt-8" />
+          <div className="flex flex-wrap gap-6 mt-6">
+            <SiteLink page="activities" slot="press-feature-1" defaultHref="" defaultLinkText="Read Article"
+              className="font-sans text-sm text-stone-300 hover:text-stone-100 transition-colors" />
+            <SiteLink page="activities" slot="press-feature-2" defaultHref="" defaultLinkText="Read Article"
+              className="font-sans text-sm text-stone-300 hover:text-stone-100 transition-colors" />
           </div>
         </div>
       </section>
