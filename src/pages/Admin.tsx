@@ -14,7 +14,8 @@ interface SavedLink { id: string; page: string; slot: string; href: string; link
 type Status = { type: 'success' | 'error'; message: string } | null;
 type Tab = 'images' | 'texts' | 'videos' | 'links';
 
-const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD as string;
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
 const IMAGE_PAGES = [...new Set(IMAGE_SLOTS.map((s) => s.page))];
 const TEXT_PAGES  = [...new Set(TEXT_SLOTS.map((s) => s.page))];
 const VIDEO_PAGES = [...new Set(VIDEO_SLOTS.map((s) => s.page))];
@@ -53,11 +54,26 @@ function Sidebar({ pages, activePage, onSelect, counts }: { pages: string[]; act
 function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
   const [value, setValue] = useState('');
   const [error, setError] = useState(false);
+  const [checking, setChecking] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (value === ADMIN_PASSWORD) { onUnlock(); }
-    else { setError(true); setValue(''); setTimeout(() => setError(false), 2000); }
+    if (!value.trim()) return;
+    setChecking(true);
+    try {
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/admin-auth`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
+        body: JSON.stringify({ password: value }),
+      });
+      const { ok } = await res.json();
+      if (ok) { onUnlock(); }
+      else { setError(true); setValue(''); setTimeout(() => setError(false), 2000); }
+    } catch {
+      setError(true); setValue(''); setTimeout(() => setError(false), 2000);
+    } finally {
+      setChecking(false);
+    }
   };
 
   return (
@@ -69,7 +85,9 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
           <input type="password" value={value} onChange={(e) => setValue(e.target.value)} placeholder="Password" autoFocus
             className={`w-full bg-transparent border-b py-3 font-sans text-base text-stone-100 placeholder-stone-600 focus:outline-none transition-colors ${error ? 'border-red-500' : 'border-stone-600 focus:border-stone-300'}`} />
           {error && <p className="font-sans text-sm text-red-400">Incorrect password</p>}
-          <button type="submit" className="w-full font-sans text-sm text-stone-400 hover:text-stone-100 border border-stone-700 hover:border-stone-400 py-3 transition-colors">Enter</button>
+          <button type="submit" disabled={checking} className="w-full flex items-center justify-center gap-2 font-sans text-sm text-stone-400 hover:text-stone-100 border border-stone-700 hover:border-stone-400 py-3 transition-colors disabled:opacity-50">
+            {checking ? <><Loader className="w-3.5 h-3.5 animate-spin" /> Checking…</> : 'Enter'}
+          </button>
         </form>
       </div>
     </div>

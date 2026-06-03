@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import CookieConsent from './components/CookieConsent';
+import ErrorBoundary from './components/ErrorBoundary';
 import { EditModeProvider } from './context/EditModeContext';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -25,7 +26,9 @@ function Layout() {
     <div className="min-h-screen flex flex-col bg-stone-50">
       {!isAdmin && <Navbar />}
       <main id="main-content" className="flex-1" tabIndex={-1}>
-        <Outlet />
+        <ErrorBoundary>
+          <Outlet />
+        </ErrorBoundary>
       </main>
       {!isAdmin && <Footer />}
       <CookieConsent />
@@ -59,8 +62,28 @@ function App() {
   return (
     <HashRouter>
       <EditModeProvider>
-        <ScrollToTop />
-        <AppRoutes />
+        <ErrorBoundary
+          fallback={
+            <div className="min-h-screen flex items-center justify-center px-6 bg-stone-50">
+              <div className="text-center max-w-sm">
+                <p className="font-sans text-[10px] tracking-widest uppercase text-stone-400 mb-4">Error</p>
+                <h1 className="font-serif text-3xl font-light text-stone-900 mb-4">Application error</h1>
+                <p className="font-sans text-sm text-stone-500 leading-relaxed mb-8">
+                  Something went wrong. Please refresh the page.
+                </p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="font-sans text-sm text-stone-100 bg-stone-900 hover:bg-stone-700 transition-colors px-6 py-3"
+                >
+                  Refresh page
+                </button>
+              </div>
+            </div>
+          }
+        >
+          <ScrollToTop />
+          <AppRoutes />
+        </ErrorBoundary>
       </EditModeProvider>
     </HashRouter>
   );
