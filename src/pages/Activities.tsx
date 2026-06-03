@@ -1,4 +1,5 @@
 import SiteImage from '../components/SiteImage';
+import SiteText from '../components/SiteText';
 
 export default function Activities() {
   const events = [
@@ -24,7 +25,7 @@ export default function Activities() {
           <p className="font-sans text-[10px] tracking-widest uppercase text-stone-500 mb-4">Engagement</p>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-stone-900 mb-5 leading-tight">Activities</h1>
           <p className="font-sans text-base text-stone-600 max-w-2xl leading-relaxed">
-            Industry participation, events, and collaborations that connect our work to the broader textile ecosystem.
+            <SiteText page="activities" slot="page-intro" defaultContent="Industry participation, events, and collaborations that connect our work to the broader textile ecosystem." />
           </p>
         </div>
       </section>
@@ -38,7 +39,7 @@ export default function Activities() {
             </div>
             <div className="lg:col-span-7">
               <p className="font-sans text-base text-stone-600 leading-relaxed mb-4">
-                Over two decades, we have built relationships across the global textile industry — participating in international trade fairs, contributing to industry associations, and collaborating with research institutions.
+                <SiteText page="activities" slot="industry-body" defaultContent="Over two decades, we have built relationships across the global textile industry — participating in international trade fairs, contributing to industry associations, and collaborating with research institutions." />
               </p>
               <p className="font-sans text-base text-stone-600 leading-relaxed">
                 This engagement keeps us connected to market developments, sustainability standards, and emerging fiber technologies.

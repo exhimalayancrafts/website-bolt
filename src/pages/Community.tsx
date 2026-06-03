@@ -1,4 +1,5 @@
 import SiteImage from '../components/SiteImage';
+import SiteText from '../components/SiteText';
 
 export default function Community() {
   const profiles = [
@@ -16,7 +17,7 @@ export default function Community() {
           <p className="font-sans text-[10px] tracking-widest uppercase text-stone-500 mb-4">People</p>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-stone-900 mb-5 leading-tight">Community</h1>
           <p className="font-sans text-base text-stone-600 max-w-2xl leading-relaxed">
-            The artisans behind our textiles — their skills, their stories, and their contributions to the work.
+            <SiteText page="community" slot="page-intro" defaultContent="The artisans behind our textiles — their skills, their stories, and their contributions to the work." />
           </p>
         </div>
       </section>
@@ -30,7 +31,7 @@ export default function Community() {
             </div>
             <div className="lg:col-span-7">
               <p className="font-sans text-base text-stone-600 leading-relaxed mb-4">
-                We employ over 200 artisans — weavers, spinners, sorters, finishers, and supervisors — many of whom have worked with us for decades. Their knowledge shapes every product we make.
+                <SiteText page="community" slot="approach-body" defaultContent="We employ over 200 artisans — weavers, spinners, sorters, finishers, and supervisors — many of whom have worked with us for decades. Their knowledge shapes every product we make." />
               </p>
               <p className="font-sans text-base text-stone-600 leading-relaxed">
                 Our role is to provide stable work, fair compensation, and conditions that respect skill. We do not frame this as charity or assistance. It is simply how decent work should be organized.
@@ -47,9 +48,11 @@ export default function Community() {
             <SiteImage page="community" slot="women-artisans" fallbackLabel="Women artisans at work" aspect="aspect-[4/5]" className="rounded-sm" />
             <div>
               <p className="font-sans text-[10px] tracking-widest uppercase text-stone-500 mb-5">Women's Work</p>
-              <h2 className="font-serif text-2xl md:text-3xl font-light text-stone-900 mb-6 leading-snug">Majority women-led production.</h2>
+              <h2 className="font-serif text-2xl md:text-3xl font-light text-stone-900 mb-6 leading-snug">
+                <SiteText page="community" slot="women-heading" defaultContent="Majority women-led production." />
+              </h2>
               <p className="font-sans text-base text-stone-600 leading-relaxed mb-4">
-                Over 60% of our workforce are women — many heading households, supporting families, and maintaining craft traditions passed through generations of mothers and daughters.
+                <SiteText page="community" slot="women-body" defaultContent="Over 60% of our workforce are women — many heading households, supporting families, and maintaining craft traditions passed through generations of mothers and daughters." />
               </p>
               <p className="font-sans text-base text-stone-600 leading-relaxed mb-4">
                 Weaving, spinning, and finishing have historically been women's work in this region. We support this tradition through fair wages, skills development, and leadership pathways.

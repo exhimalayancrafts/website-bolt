@@ -1,4 +1,5 @@
 import SiteImage from '../components/SiteImage';
+import SiteText from '../components/SiteText';
 
 export default function Sourcing() {
   const sources = [
@@ -44,7 +45,7 @@ export default function Sourcing() {
           <p className="font-sans text-[10px] tracking-widest uppercase text-stone-500 mb-4">Origins</p>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-stone-900 mb-5 leading-tight">Sourcing</h1>
           <p className="font-sans text-base text-stone-600 max-w-2xl leading-relaxed">
-            How and where we obtain our fibers — the landscapes, animals, and communities at the beginning of the supply chain.
+            <SiteText page="sourcing" slot="page-intro" defaultContent="How and where we obtain our fibers — the landscapes, animals, and communities at the beginning of the supply chain." />
           </p>
         </div>
       </section>
@@ -58,11 +59,11 @@ export default function Sourcing() {
             </div>
             <div className="lg:col-span-7">
               <p className="font-sans text-base text-stone-600 leading-relaxed mb-4">
-                We source fiber directly from herding families and community groups, maintaining personal knowledge of animals, grazing practices, and harvest methods. This direct relationship allows genuine traceability and fair terms.
-              </p>
+                  <SiteText page="sourcing" slot="approach-body" defaultContent="We source fiber directly from herding families and community groups, maintaining personal knowledge of animals, grazing practices, and harvest methods. This direct relationship allows genuine traceability and fair terms." />
+                </p>
               <p className="font-sans text-base text-stone-600 leading-relaxed">
-                Each fiber type comes from a distinct environment with its own climate, seasonality, and traditional knowledge. Understanding these origins is essential to producing quality textiles.
-              </p>
+                  Each fiber type comes from a distinct environment with its own climate, seasonality, and traditional knowledge. Understanding these origins is essential to producing quality textiles.
+                </p>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import SiteImage from '../components/SiteImage';
+import SiteText from '../components/SiteText';
 
 export default function Manufacturing() {
   const processes = [
@@ -18,7 +19,7 @@ export default function Manufacturing() {
           <p className="font-sans text-[10px] tracking-widest uppercase text-stone-500 mb-4">Production</p>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-stone-900 mb-5 leading-tight">Manufacturing</h1>
           <p className="font-sans text-base text-stone-600 max-w-2xl leading-relaxed">
-            We own and operate our production facilities in Kathmandu, maintaining direct oversight from raw fiber to finished product.
+            <SiteText page="manufacturing" slot="page-intro" defaultContent="We own and operate our production facilities in Kathmandu, maintaining direct oversight from raw fiber to finished product." />
           </p>
         </div>
       </section>
@@ -32,7 +33,7 @@ export default function Manufacturing() {
               <p className="font-sans text-[10px] tracking-widest uppercase text-stone-500 mb-5">Facilities</p>
               <h2 className="font-serif text-2xl md:text-3xl font-light text-stone-900 mb-6 leading-snug">Owned production, direct control.</h2>
               <p className="font-sans text-base text-stone-600 leading-relaxed mb-4">
-                Unlike many operators who outsource manufacturing, we own our facilities in Kathmandu Valley. This allows us to control quality at every stage, ensure fair working conditions, and maintain consistent standards.
+                <SiteText page="manufacturing" slot="facility-body" defaultContent="Unlike many operators who outsource manufacturing, we own our facilities in Kathmandu Valley. This allows us to control quality at every stage, ensure fair working conditions, and maintain consistent standards." />
               </p>
               <p className="font-sans text-base text-stone-600 leading-relaxed">
                 Our workshops combine traditional handwork with quality-controlled modern processes. Hand-spinning zones sit alongside machine carding lines. Handlooms operate in parallel with finishing equipment.

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import SiteImage from '../components/SiteImage';
+import SiteText from '../components/SiteText';
 
 export default function Home() {
   return (
@@ -18,12 +19,14 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-stone-900/40 via-stone-900/20 to-stone-900/60" />
         </div>
         <div className="relative z-10 text-center px-6 max-w-4xl">
-          <p className="font-sans text-[10px] tracking-widest uppercase text-stone-200 mb-5">Himalayan Textiles</p>
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-light text-white mb-6 leading-tight tracking-tight">
-            Where Mountains<br />Meet Fibers
+          <p className="font-sans text-[10px] tracking-widest uppercase text-stone-200 mb-5">
+            <SiteText page="home" slot="hero-eyebrow" defaultContent="Himalayan Textiles" />
+          </p>
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light text-white mb-6 leading-tight tracking-tight">
+            <SiteText page="home" slot="hero-heading" defaultContent={'Where Mountains\nMeet Fibers'} />
           </h1>
-          <p className="font-sans text-base md:text-lg text-stone-200 max-w-xl mx-auto leading-relaxed">
-            An ecosystem of responsible fiber production rooted in the landscapes, communities, and traditions of the Himalayas.
+          <p className="font-sans text-sm md:text-lg text-stone-200 max-w-xl mx-auto leading-relaxed">
+            <SiteText page="home" slot="hero-subtext" defaultContent="An ecosystem of responsible fiber production rooted in the landscapes, communities, and traditions of the Himalayas." />
           </p>
         </div>
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
@@ -32,9 +35,9 @@ export default function Home() {
       </section>
 
       {/* Introduction */}
-      <section className="py-20 px-6 lg:px-12 bg-stone-50">
+      <section className="py-14 px-6 lg:px-12 bg-stone-50">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-5">
               <SiteImage
                 page="home"
@@ -47,13 +50,13 @@ export default function Home() {
             <div className="lg:col-span-6 lg:col-start-7">
               <p className="font-sans text-[10px] tracking-widest uppercase text-stone-500 mb-5">The Work</p>
               <h2 className="font-serif text-3xl md:text-4xl font-light text-stone-900 mb-6 leading-snug">
-                We work with nature to create textiles that carry the story of their origin.
+                <SiteText page="home" slot="intro-heading" defaultContent="We work with nature to create textiles that carry the story of their origin." />
               </h2>
               <p className="font-sans text-base text-stone-600 leading-relaxed mb-4">
-                Exclusive Crafts is a Himalayan fiber company working with cashmere, yak wool, sheep wool, and emerging plant-based fibers. We maintain direct relationships with herders, oversee our own manufacturing, and produce textiles that reflect the landscapes they come from.
+                <SiteText page="home" slot="intro-body-1" defaultContent="Exclusive Crafts is a Himalayan fiber company working with cashmere, yak wool, sheep wool, and emerging plant-based fibers. We maintain direct relationships with herders, oversee our own manufacturing, and produce textiles that reflect the landscapes they come from." />
               </p>
               <p className="font-sans text-base text-stone-600 leading-relaxed">
-                Our model is built on traceability, quality, and long-term relationships with the people who raise animals and craft fibers in some of the world's most challenging environments.
+                <SiteText page="home" slot="intro-body-2" defaultContent="Our model is built on traceability, quality, and long-term relationships with the people who raise animals and craft fibers in some of the world's most challenging environments." />
               </p>
             </div>
           </div>
@@ -67,14 +70,14 @@ export default function Home() {
             <p className="font-sans text-[10px] tracking-widest uppercase text-stone-500 mb-3">Materials</p>
             <h2 className="font-serif text-3xl md:text-4xl font-light text-stone-900 leading-snug">Four fibers. One origin.</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-stone-300">
+          <div className="grid grid-cols-2 gap-px bg-stone-300">
             {[
               { name: 'Cashmere', origin: 'High-altitude goats', link: '/fibers' },
               { name: 'Yak Wool', origin: 'Himalayan plateaus', link: '/fibers' },
               { name: 'Sheep Wool', origin: 'Mountain valleys', link: '/fibers' },
               { name: 'Allo', origin: 'Wild Himalayan nettle', link: '/fibers' },
             ].map((fiber) => (
-              <Link key={fiber.name} to={fiber.link} className="group bg-stone-50 p-8 hover:bg-stone-100 transition-colors">
+              <Link key={fiber.name} to={fiber.link} className="group bg-stone-50 p-6 hover:bg-stone-100 transition-colors">
                 <h3 className="font-serif text-xl font-light text-stone-900 mb-1 group-hover:text-stone-700 transition-colors">{fiber.name}</h3>
                 <p className="font-sans text-sm text-stone-500">{fiber.origin}</p>
               </Link>
@@ -146,7 +149,7 @@ export default function Home() {
       {/* Community Hint */}
       <section className="py-20 px-6 lg:px-12 bg-stone-50">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <SiteImage
               page="home"
               slot="community-portrait"

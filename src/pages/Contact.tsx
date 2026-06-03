@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import SiteImage from '../components/SiteImage';
+import SiteText from '../components/SiteText';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', company: '', role: '', interest: '', message: '' });
@@ -22,7 +23,7 @@ export default function Contact() {
           <p className="font-sans text-[10px] tracking-widest uppercase text-stone-500 mb-4">Get in Touch</p>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-stone-900 mb-5 leading-tight">Contact</h1>
           <p className="font-sans text-base text-stone-600 max-w-2xl leading-relaxed">
-            For partnership inquiries, wholesale orders, or general questions.
+            <SiteText page="contact" slot="page-intro" defaultContent="For partnership inquiries, wholesale orders, or general questions." />
           </p>
         </div>
       </section>
@@ -89,18 +90,20 @@ export default function Contact() {
               <div className="lg:sticky lg:top-28 space-y-10">
                 <div>
                   <p className="font-sans text-[10px] tracking-widest uppercase text-stone-400 mb-3">Office</p>
-                  <p className="font-sans text-base text-stone-600 leading-relaxed">Exclusive Crafts<br />Gokarneshwor-06, Jorpati<br />Kathmandu, Nepal</p>
+                  <p className="font-sans text-base text-stone-600 leading-relaxed">
+                    <SiteText page="contact" slot="address" defaultContent={'Exclusive Crafts\nGokarneshwor-06, Jorpati\nKathmandu, Nepal'} />
+                  </p>
                 </div>
                 <div>
                   <p className="font-sans text-[10px] tracking-widest uppercase text-stone-400 mb-3">Email</p>
                   <a href="mailto:hello@exclusivecrafts.com" className="font-sans text-base text-stone-600 hover:text-stone-900 transition-colors">
-                    hello@exclusivecrafts.com
+                    <SiteText page="contact" slot="email" defaultContent="hello@exclusivecrafts.com" />
                   </a>
                 </div>
                 <div>
                   <p className="font-sans text-[10px] tracking-widest uppercase text-stone-400 mb-3">Phone</p>
                   <a href="tel:+9771234567" className="font-sans text-base text-stone-600 hover:text-stone-900 transition-colors">
-                    +977 (1) 123-4567
+                    <SiteText page="contact" slot="phone" defaultContent="+977 (1) 123-4567" />
                   </a>
                 </div>
                 <div>
@@ -124,7 +127,7 @@ export default function Contact() {
       <section className="py-16 px-6 lg:px-12">
         <div className="max-w-2xl mx-auto text-center">
           <p className="font-sans text-base text-stone-500 leading-relaxed">
-            Samples, specifications, and wholesale terms are available to qualified partners. Please include company details and area of interest in your message.
+            <SiteText page="contact" slot="footer-note" defaultContent="Samples, specifications, and wholesale terms are available to qualified partners. Please include company details and area of interest in your message." />
           </p>
         </div>
       </section>
