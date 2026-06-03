@@ -1,4 +1,5 @@
 import SiteImage from '../components/SiteImage';
+import PageMeta from '../components/PageMeta';
 
 export default function Fibers() {
   const fibers = [
@@ -46,6 +47,7 @@ export default function Fibers() {
 
   return (
     <div className="bg-stone-50">
+      <PageMeta title="Himalayan Fibers — Cashmere, Yak, Sheep & Allo" description="Explore the four Himalayan natural fibers we work with: cashmere, yak wool, sheep wool, and allo nettle fiber." />
       {/* Header */}
       <section className="py-16 px-6 lg:px-12 border-b border-stone-200">
         <div className="max-w-6xl mx-auto">

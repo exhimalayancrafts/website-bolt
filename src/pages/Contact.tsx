@@ -2,6 +2,7 @@ import { useState } from 'react';
 import SiteImage from '../components/SiteImage';
 import SiteText from '../components/SiteText';
 import SiteLink from '../components/SiteLink';
+import PageMeta from '../components/PageMeta';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', company: '', role: '', interest: '', message: '' });
@@ -18,6 +19,7 @@ export default function Contact() {
 
   return (
     <div className="bg-stone-50">
+      <PageMeta title="Contact Exclusive Crafts — Wholesale Inquiries" description="Get in touch with Exclusive Crafts for wholesale orders, partnership inquiries, and product information." />
       {/* Header */}
       <section className="py-16 px-6 lg:px-12 border-b border-stone-200">
         <div className="max-w-6xl mx-auto">

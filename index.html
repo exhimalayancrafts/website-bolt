@@ -2,29 +2,64 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exclusive Crafts – Handmade Cashmere from the Himalayas</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Default title & description (overridden per-page by PageMeta) -->
+    <title>Exclusive Crafts — Himalayan Cashmere &amp; Fine Textiles</title>
+    <meta name="description" content="Premium Himalayan fiber company producing cashmere, yak wool, sheep wool, and allo textiles from Kathmandu, Nepal since 1993." />
+
+    <!-- Open Graph (default; per-page values set via PageMeta component) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Exclusive Crafts" />
+    <meta property="og:title" content="Exclusive Crafts — Himalayan Cashmere &amp; Fine Textiles" />
+    <meta property="og:description" content="Premium Himalayan fiber company producing cashmere, yak wool, sheep wool, and allo textiles from Kathmandu, Nepal since 1993." />
+    <meta property="og:image" content="https://exclusivecrafts.com/og-default.jpg" />
+    <meta property="og:url" content="https://exclusivecrafts.com" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Exclusive Crafts — Himalayan Cashmere &amp; Fine Textiles" />
+    <meta name="twitter:description" content="Premium Himalayan fiber company producing cashmere, yak wool, sheep wool, and allo textiles from Kathmandu, Nepal since 1993." />
+    <meta name="twitter:image" content="https://exclusivecrafts.com/og-default.jpg" />
+
+    <!-- Google Search Console verification (replace content value) -->
+    <meta name="google-site-verification" content="REPLACE_WITH_GOOGLE_SEARCH_CONSOLE_TOKEN" />
+
+    <!-- Canonical (SPA — updated per-page by PageMeta) -->
+    <link rel="canonical" href="https://exclusivecrafts.com" />
+
+    <!-- Performance: preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <!-- GitHub Pages SPA redirect handler -->
     <script>
-      // GitHub Pages SPA: decode redirect from 404.html
       (function(l) {
         if (l.search[1] === '/') {
           var decoded = l.search.slice(1).split('&').map(function(s) {
             return s.replace(/~and~/g, '&');
           });
-          window.history.replaceState(
-            null, null,
+          window.history.replaceState(null, null,
             l.pathname.slice(0, -1) + decoded[0] +
-            (decoded[1] ? '?' + decoded[1] : '') +
-            l.hash
+            (decoded[1] ? '?' + decoded[1] : '') + l.hash
           );
         }
       }(window.location));
     </script>
-    <meta name="description" content="Premium wholesale cashmere manufacturer based in Kathmandu, Nepal. Est. 1993. Scarves, sweaters, blankets, wraps and custom orders." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <!-- Google Analytics 4 — replace GA_MEASUREMENT_ID with your ID -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script> -->
   </head>
   <body>
     <div id="root"></div>

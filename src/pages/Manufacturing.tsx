@@ -1,5 +1,6 @@
 import SiteImage from '../components/SiteImage';
 import SiteText from '../components/SiteText';
+import PageMeta from '../components/PageMeta';
 
 export default function Manufacturing() {
   const processes = [
@@ -13,6 +14,7 @@ export default function Manufacturing() {
 
   return (
     <div className="bg-stone-50">
+      <PageMeta title="Manufacturing — Exclusive Crafts Nepal" description="Our Kathmandu manufacturing facilities combine traditional handcraft with quality-controlled production processes." />
       {/* Header */}
       <section className="py-16 px-6 lg:px-12 border-b border-stone-200">
         <div className="max-w-6xl mx-auto">

@@ -1,5 +1,6 @@
 import SiteImage from '../components/SiteImage';
 import SiteText from '../components/SiteText';
+import PageMeta from '../components/PageMeta';
 
 export default function Sourcing() {
   const sources = [
@@ -39,6 +40,7 @@ export default function Sourcing() {
 
   return (
     <div className="bg-stone-50">
+      <PageMeta title="Fiber Sourcing — Exclusive Crafts" description="How we source cashmere, yak, sheep wool, and allo fiber directly from Himalayan herders and communities." />
       {/* Header */}
       <section className="py-16 px-6 lg:px-12 border-b border-stone-200">
         <div className="max-w-6xl mx-auto">

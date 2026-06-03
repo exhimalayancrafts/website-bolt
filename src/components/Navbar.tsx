@@ -77,69 +77,74 @@ export default function Navbar() {
   const [expanded, setExpanded] = useState<string | null>(null);
   const location = useLocation();
 
+  useEffect(() => { setIsOpen(false); setExpanded(null); }, [location.pathname]);
+
   const isActive = (path: string) => location.pathname === path;
   const isGroupActive = (children: DropdownItem[]) => children.some((c) => location.pathname === c.path);
 
   return (
-    <nav className="sticky top-0 z-50 bg-stone-50/95 backdrop-blur-sm border-b border-stone-200">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-3" onClick={() => setIsOpen(false)}>
-          <span className="font-serif text-xl font-semibold text-stone-900 tracking-tight">
-            Exclusive Crafts
-          </span>
-        </Link>
+    <>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[200] focus:bg-stone-900 focus:text-white focus:px-4 focus:py-2 focus:text-sm font-sans rounded">
+        Skip to main content
+      </a>
+      <nav className="sticky top-0 z-50 bg-stone-50/95 backdrop-blur-sm border-b border-stone-200" role="navigation" aria-label="Main navigation">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-3" aria-label="Exclusive Crafts — home">
+            <span className="font-serif text-xl font-semibold text-stone-900 tracking-tight">Exclusive Crafts</span>
+          </Link>
 
-        {/* Desktop */}
-        <div className="hidden lg:flex items-center gap-8">
-          {NAV.map((item) =>
-            item.children ? (
-              <DesktopDropdown key={item.label} item={item} active={isGroupActive(item.children)} />
-            ) : (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`font-sans text-[11px] tracking-wide uppercase transition-colors relative pb-1 ${
-                  isActive(item.path) ? 'text-stone-900' : 'text-stone-500 hover:text-stone-800'
-                }`}
-              >
-                {item.label}
-                {isActive(item.path) && (
-                  <span className="absolute bottom-0 left-0 right-0 h-px bg-stone-900" />
-                )}
-              </Link>
-            )
-          )}
+          {/* Desktop */}
+          <div className="hidden lg:flex items-center gap-8">
+            {NAV.map((item) =>
+              item.children ? (
+                <DesktopDropdown key={item.label} item={item} active={isGroupActive(item.children)} />
+              ) : (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  aria-current={isActive(item.path) ? 'page' : undefined}
+                  className={`font-sans text-[11px] tracking-wide uppercase transition-colors relative pb-1 ${
+                    isActive(item.path) ? 'text-stone-900' : 'text-stone-500 hover:text-stone-800'
+                  }`}
+                >
+                  {item.label}
+                  {isActive(item.path) && <span className="absolute bottom-0 left-0 right-0 h-px bg-stone-900" />}
+                </Link>
+              )
+            )}
+          </div>
+
+          {/* Mobile toggle */}
+          <button
+            className="lg:hidden p-2 text-stone-700 rounded focus:outline-none focus:ring-2 focus:ring-stone-400"
+            onClick={() => { setIsOpen(!isOpen); setExpanded(null); }}
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
+          >
+            {isOpen ? <X className="w-5 h-5" aria-hidden="true" /> : <Menu className="w-5 h-5" aria-hidden="true" />}
+          </button>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="lg:hidden p-2 text-stone-700"
-          onClick={() => { setIsOpen(!isOpen); setExpanded(null); }}
-          aria-label="Toggle menu"
+        {/* Mobile menu */}
+        <div
+          id="mobile-menu"
+          className={`lg:hidden bg-stone-50 border-t border-stone-200 overflow-hidden transition-all duration-200 ${isOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}
+          aria-hidden={!isOpen}
         >
-          {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      {isOpen && (
-        <div className="lg:hidden bg-stone-50 border-t border-stone-200">
           <div className="px-6 py-4 space-y-1">
             {NAV.map((item) =>
               item.children ? (
                 <div key={item.label}>
                   <button
                     onClick={() => setExpanded(expanded === item.label ? null : item.label)}
+                    aria-expanded={expanded === item.label}
                     className={`w-full flex items-center justify-between font-sans text-xs tracking-widest uppercase py-2.5 transition-colors ${
                       isGroupActive(item.children) ? 'text-stone-900' : 'text-stone-500'
                     }`}
                   >
                     {item.label}
-                    <ChevronDown
-                      className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                        expanded === item.label ? 'rotate-180' : ''
-                      }`}
-                    />
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${expanded === item.label ? 'rotate-180' : ''}`} aria-hidden="true" />
                   </button>
                   {expanded === item.label && (
                     <div className="pl-4 pb-1 space-y-0.5">
@@ -147,7 +152,7 @@ export default function Navbar() {
                         <Link
                           key={child.path}
                           to={child.path}
-                          onClick={() => { setIsOpen(false); setExpanded(null); }}
+                          aria-current={isActive(child.path) ? 'page' : undefined}
                           className={`block font-sans text-xs tracking-widest uppercase py-2 transition-colors ${
                             isActive(child.path) ? 'text-stone-900' : 'text-stone-400 hover:text-stone-700'
                           }`}
@@ -162,7 +167,7 @@ export default function Navbar() {
                 <Link
                   key={item.path}
                   to={item.path}
-                  onClick={() => { setIsOpen(false); setExpanded(null); }}
+                  aria-current={isActive(item.path) ? 'page' : undefined}
                   className={`block font-sans text-xs tracking-widest uppercase py-2.5 transition-colors ${
                     isActive(item.path) ? 'text-stone-900' : 'text-stone-500 hover:text-stone-700'
                   }`}
@@ -173,7 +178,7 @@ export default function Navbar() {
             )}
           </div>
         </div>
-      )}
-    </nav>
+      </nav>
+    </>
   );
 }

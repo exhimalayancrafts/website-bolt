@@ -1,5 +1,6 @@
 import SiteImage from '../components/SiteImage';
 import SiteText from '../components/SiteText';
+import PageMeta from '../components/PageMeta';
 import { Link } from 'react-router-dom';
 
 const collections = [
@@ -14,6 +15,7 @@ const collections = [
 export default function Products() {
   return (
     <div className="bg-stone-50">
+      <PageMeta title="Textiles & Products — Exclusive Crafts" description="Wholesale Himalayan textile products including cashmere scarves, shawls, throws, and allo fiber goods." />
       {/* Header */}
       <section className="py-12 px-6 lg:px-12 border-b border-stone-200">
         <div className="max-w-6xl mx-auto">
