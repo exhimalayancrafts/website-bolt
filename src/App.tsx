@@ -3,7 +3,6 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import CookieConsent from './components/CookieConsent';
-import EditModeToggle from './components/EditModeToggle';
 import { EditModeProvider } from './context/EditModeContext';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -29,7 +28,6 @@ function Layout() {
         <Outlet />
       </main>
       {!isAdmin && <Footer />}
-      {!isAdmin && <EditModeToggle />}
       <CookieConsent />
     </div>
   );

@@ -182,33 +182,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 px-6 lg:px-12 bg-stone-900 text-stone-100" aria-label="Client testimonials">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-12 text-center">
-            <p className="font-sans text-[10px] tracking-widest uppercase text-stone-500 mb-3">Partners Say</p>
-            <h2 className="font-serif text-2xl md:text-3xl font-light text-stone-100">Trusted by buyers worldwide</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-stone-800">
-            {[
-              { quote: "The quality and consistency of Exclusive Crafts cashmere is unlike anything else in the market. Our customers can feel the difference immediately.", name: "A. Laurent", role: "Buyer, Paris" },
-              { quote: "Working with Exclusive Crafts gives us complete confidence in our supply chain. The traceability documentation is thorough and their team is responsive.", name: "M. Tanaka", role: "Procurement, Tokyo" },
-              { quote: "We've partnered with them for over a decade. Their allo fiber program is genuinely innovative — sustainable, strong, and beautiful in construction.", name: "R. Hendricks", role: "Designer, Amsterdam" },
-            ].map((t) => (
-              <figure key={t.name} className="bg-stone-900 p-8 flex flex-col">
-                <blockquote className="font-serif text-lg font-light text-stone-300 leading-relaxed flex-1 mb-6">
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
-                <figcaption>
-                  <p className="font-sans text-sm font-medium text-stone-100">{t.name}</p>
-                  <p className="font-sans text-xs text-stone-500 mt-0.5">{t.role}</p>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Closing */}
       <section className="py-16 px-6 lg:px-12 bg-stone-100">
         <div className="max-w-2xl mx-auto text-center">
