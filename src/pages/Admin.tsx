@@ -4,7 +4,7 @@ import { IMAGE_SLOTS, type ImageSlot } from '../lib/imageSlots';
 import { TEXT_SLOTS, type TextSlot } from '../lib/textSlots';
 import { VIDEO_SLOTS, type VideoSlot } from '../lib/videoSlots';
 import { LINK_SLOTS, type LinkSlot } from '../lib/linkSlots';
-import { Upload, Trash2, CheckCircle, AlertCircle, Loader, Lock, Image, Type, Video, Link2, Save } from 'lucide-react';
+import { Upload, Trash2, CheckCircle, AlertCircle, Loader, Lock, Image, Type, Video, Link2, Save, Inbox, Mail, Building2, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface UploadedImage { id: string; page: string; slot: string; label: string; storage_path: string; }
 interface SavedText { id: string; page: string; slot: string; content: string; }
@@ -12,7 +12,7 @@ interface SavedVideo { id: string; page: string; slot: string; url: string; }
 interface SavedLink { id: string; page: string; slot: string; href: string; link_text: string; opens_new_tab: boolean; }
 
 type Status = { type: 'success' | 'error'; message: string } | null;
-type Tab = 'images' | 'texts' | 'videos' | 'links';
+type Tab = 'images' | 'texts' | 'videos' | 'links' | 'submissions';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
@@ -51,7 +51,7 @@ function Sidebar({ pages, activePage, onSelect, counts }: { pages: string[]; act
 
 // ─── Password gate ────────────────────────────────────────────────────────────
 
-function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
+function PasswordGate({ onUnlock }: { onUnlock: (password: string) => void }) {
   const [value, setValue] = useState('');
   const [error, setError] = useState(false);
   const [checking, setChecking] = useState(false);
@@ -67,7 +67,7 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
         body: JSON.stringify({ password: value }),
       });
       const { ok } = await res.json();
-      if (ok) { onUnlock(); }
+      if (ok) { onUnlock(value); }
       else { setError(true); setValue(''); setTimeout(() => setError(false), 2000); }
     } catch {
       setError(true); setValue(''); setTimeout(() => setError(false), 2000);
@@ -507,19 +507,196 @@ function LinksTab() {
   );
 }
 
+// ─── Submissions Tab ──────────────────────────────────────────────────────────
+
+interface Submission {
+  id: string;
+  name: string;
+  email: string;
+  company: string;
+  role: string;
+  interest: string;
+  message: string;
+  is_read: boolean;
+  created_at: string;
+}
+
+const INTEREST_LABELS: Record<string, string> = {
+  wholesale: 'Wholesale Inquiry',
+  partnership: 'Partnership',
+  product: 'Product Information',
+  sourcing: 'Sourcing Details',
+  press: 'Press & Media',
+  other: 'Other',
+};
+
+function SubmissionsTab({ adminPassword }: { adminPassword: string }) {
+  const [submissions, setSubmissions] = useState<Submission[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const [status, setStatus] = useState<Status>(null);
+
+  const apiHeaders = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+    'X-Admin-Password': adminPassword,
+  };
+
+  function showStatus(type: 'success' | 'error', message: string) {
+    setStatus({ type, message });
+    setTimeout(() => setStatus(null), 4000);
+  }
+
+  useEffect(() => {
+    fetch(`${SUPABASE_URL}/functions/v1/admin-submissions`, { headers: apiHeaders })
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data)) setSubmissions(data as Submission[]);
+        else showStatus('error', 'Could not load submissions');
+      })
+      .catch(() => showStatus('error', 'Could not load submissions'))
+      .finally(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  async function markRead(sub: Submission) {
+    const next = !sub.is_read;
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/admin-submissions?id=${sub.id}`, {
+      method: 'PATCH',
+      headers: apiHeaders,
+      body: JSON.stringify({ is_read: next }),
+    });
+    if (!res.ok) { showStatus('error', 'Could not update'); return; }
+    setSubmissions((prev) => prev.map((s) => s.id === sub.id ? { ...s, is_read: next } : s));
+  }
+
+  async function deleteSubmission(id: string) {
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/admin-submissions?id=${id}`, {
+      method: 'DELETE',
+      headers: apiHeaders,
+    });
+    if (!res.ok) { showStatus('error', 'Could not delete'); return; }
+    setSubmissions((prev) => prev.filter((s) => s.id !== id));
+    if (expanded === id) setExpanded(null);
+    showStatus('success', 'Submission deleted');
+  }
+
+  const unread = submissions.filter((s) => !s.is_read).length;
+
+  return (
+    <div className="flex-1 overflow-y-auto">
+      <Toast status={status} />
+      <div className="p-6 max-w-4xl mx-auto">
+        <div className="flex items-center gap-3 mb-6">
+          <h2 className="font-serif text-lg font-light text-stone-900">Contact Submissions</h2>
+          {unread > 0 && (
+            <span className="bg-stone-900 text-stone-100 font-sans text-[10px] px-2 py-0.5 rounded-full">
+              {unread} new
+            </span>
+          )}
+        </div>
+
+        {loading ? (
+          <div className="flex items-center justify-center py-20">
+            <Loader className="w-5 h-5 text-stone-400 animate-spin" />
+          </div>
+        ) : submissions.length === 0 ? (
+          <div className="text-center py-20">
+            <Inbox className="w-8 h-8 text-stone-300 mx-auto mb-4" />
+            <p className="font-sans text-sm text-stone-400">No submissions yet</p>
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {submissions.map((sub) => (
+              <div key={sub.id} className={`bg-white border rounded-sm overflow-hidden transition-colors ${sub.is_read ? 'border-stone-200' : 'border-stone-400'}`}>
+                {/* Row header */}
+                <button
+                  onClick={() => {
+                    setExpanded((prev) => (prev === sub.id ? null : sub.id));
+                    if (!sub.is_read) markRead(sub);
+                  }}
+                  className="w-full flex items-center gap-4 px-5 py-4 text-left hover:bg-stone-50 transition-colors"
+                >
+                  <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${sub.is_read ? 'bg-transparent' : 'bg-stone-900'}`} />
+                  <div className="flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-4">
+                    <p className={`font-sans text-sm truncate ${sub.is_read ? 'text-stone-600' : 'text-stone-900 font-medium'}`}>
+                      {sub.name}
+                    </p>
+                    <p className="font-sans text-sm text-stone-400 truncate">{sub.email}</p>
+                    <p className="font-sans text-xs text-stone-400 truncate">
+                      {sub.interest ? (INTEREST_LABELS[sub.interest] ?? sub.interest) : 'General'}
+                      {' · '}
+                      {new Date(sub.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                    </p>
+                  </div>
+                  {expanded === sub.id ? <ChevronUp className="w-4 h-4 text-stone-400 flex-shrink-0" /> : <ChevronDown className="w-4 h-4 text-stone-400 flex-shrink-0" />}
+                </button>
+
+                {/* Expanded detail */}
+                {expanded === sub.id && (
+                  <div className="border-t border-stone-100 px-5 py-5 bg-stone-50 space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {sub.company && (
+                        <div>
+                          <p className="font-sans text-[10px] uppercase tracking-widest text-stone-400 mb-1 flex items-center gap-1.5"><Building2 className="w-3 h-3" /> Company</p>
+                          <p className="font-sans text-sm text-stone-700">{sub.company}{sub.role ? ` — ${sub.role}` : ''}</p>
+                        </div>
+                      )}
+                      <div>
+                        <p className="font-sans text-[10px] uppercase tracking-widest text-stone-400 mb-1 flex items-center gap-1.5"><Mail className="w-3 h-3" /> Email</p>
+                        <a href={`mailto:${sub.email}`} className="font-sans text-sm text-stone-700 hover:text-stone-900 underline underline-offset-2 transition-colors">{sub.email}</a>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="font-sans text-[10px] uppercase tracking-widest text-stone-400 mb-2">Message</p>
+                      <p className="font-sans text-sm text-stone-700 leading-relaxed whitespace-pre-wrap">{sub.message}</p>
+                    </div>
+                    <div className="flex items-center gap-3 pt-1">
+                      <button
+                        onClick={() => markRead(sub)}
+                        className="font-sans text-xs text-stone-500 hover:text-stone-800 border border-stone-300 hover:border-stone-500 px-3 py-1.5 transition-colors"
+                      >
+                        {sub.is_read ? 'Mark unread' : 'Mark read'}
+                      </button>
+                      <a
+                        href={`mailto:${sub.email}?subject=Re: ${encodeURIComponent(sub.interest ? (INTEREST_LABELS[sub.interest] ?? sub.interest) : 'Your Inquiry')}`}
+                        className="font-sans text-xs text-stone-100 bg-stone-900 hover:bg-stone-700 px-3 py-1.5 transition-colors"
+                      >
+                        Reply by email
+                      </a>
+                      <button
+                        onClick={() => deleteSubmission(sub.id)}
+                        className="font-sans text-xs text-red-500 hover:text-red-700 ml-auto transition-colors"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ─── Main Admin ───────────────────────────────────────────────────────────────
 
 export default function Admin() {
   const [authed, setAuthed] = useState(false);
+  const [adminPassword, setAdminPassword] = useState('');
   const [tab, setTab] = useState<Tab>('images');
 
-  if (!authed) return <PasswordGate onUnlock={() => setAuthed(true)} />;
+  if (!authed) return <PasswordGate onUnlock={(pw) => { setAuthed(true); setAdminPassword(pw); }} />;
 
   const tabs: { id: Tab; label: string; icon: React.ReactNode }[] = [
-    { id: 'images', label: 'Images', icon: <Image className="w-3.5 h-3.5" /> },
-    { id: 'texts',  label: 'Texts',  icon: <Type className="w-3.5 h-3.5" /> },
-    { id: 'videos', label: 'Videos', icon: <Video className="w-3.5 h-3.5" /> },
-    { id: 'links',  label: 'Links',  icon: <Link2 className="w-3.5 h-3.5" /> },
+    { id: 'images',      label: 'Images',      icon: <Image className="w-3.5 h-3.5" /> },
+    { id: 'texts',       label: 'Texts',        icon: <Type className="w-3.5 h-3.5" /> },
+    { id: 'videos',      label: 'Videos',       icon: <Video className="w-3.5 h-3.5" /> },
+    { id: 'links',       label: 'Links',        icon: <Link2 className="w-3.5 h-3.5" /> },
+    { id: 'submissions', label: 'Submissions',  icon: <Inbox className="w-3.5 h-3.5" /> },
   ];
 
   return (
@@ -539,10 +716,11 @@ export default function Admin() {
         </div>
       </div>
       <div className="flex flex-1 overflow-hidden" style={{ height: 'calc(100vh - 69px)' }}>
-        {tab === 'images' && <ImagesTab />}
-        {tab === 'texts'  && <TextsTab />}
-        {tab === 'videos' && <VideosTab />}
-        {tab === 'links'  && <LinksTab />}
+        {tab === 'images'      && <ImagesTab />}
+        {tab === 'texts'       && <TextsTab />}
+        {tab === 'videos'      && <VideosTab />}
+        {tab === 'links'       && <LinksTab />}
+        {tab === 'submissions' && <SubmissionsTab adminPassword={adminPassword} />}
       </div>
     </div>
   );

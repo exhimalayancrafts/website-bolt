@@ -5,6 +5,9 @@ import SiteLink from '../components/SiteLink';
 import PageMeta from '../components/PageMeta';
 import { sanitizeField, isValidEmail } from '../lib/sanitize';
 
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+
 const RATE_LIMIT_KEY = 'ec_form_ts';
 const RATE_LIMIT_MS = 60_000; // 1 submission per minute
 
@@ -23,6 +26,8 @@ const EMPTY = { name: '', email: '', company: '', role: '', interest: '', messag
 export default function Contact() {
   const [formData, setFormData] = useState(EMPTY);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [errors, setErrors] = useState<Partial<typeof EMPTY>>({});
   const [blocked, setBlocked] = useState(false);
 
@@ -48,7 +53,7 @@ export default function Contact() {
     return Object.keys(next).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Honeypot check — if filled, silently ignore
@@ -67,7 +72,6 @@ export default function Contact() {
 
     if (!validate()) return;
 
-    // Sanitize all inputs before any use
     const safe = {
       name:     sanitizeField(formData.name, 100),
       email:    sanitizeField(formData.email, 200),
@@ -77,15 +81,37 @@ export default function Contact() {
       message:  sanitizeField(formData.message, 2000),
     };
 
-    // Intentionally unused until a backend endpoint is wired up:
-    void safe;
+    setSubmitting(true);
+    setSubmitError('');
 
-    localStorage.setItem(RATE_LIMIT_KEY, String(Date.now()));
-    setSubmitted(true);
-    setTimeout(() => {
-      setFormData(EMPTY);
-      setSubmitted(false);
-    }, 6000);
+    try {
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/contact-form`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify(safe),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.ok) {
+        setSubmitError('Something went wrong. Please try again or email us directly.');
+        return;
+      }
+
+      localStorage.setItem(RATE_LIMIT_KEY, String(Date.now()));
+      setSubmitted(true);
+      setTimeout(() => {
+        setFormData(EMPTY);
+        setSubmitted(false);
+      }, 6000);
+    } catch {
+      setSubmitError('Could not send message. Please check your connection and try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const inputClass = (key: keyof typeof EMPTY) =>
@@ -237,11 +263,16 @@ export default function Contact() {
                     <p className="font-sans text-[10px] text-stone-400 mt-1 text-right">{formData.message.length}/2000</p>
                   </div>
 
+                  {submitError && (
+                    <p className="font-sans text-sm text-red-600" role="alert">{submitError}</p>
+                  )}
+
                   <button
                     type="submit"
-                    className="font-sans text-sm tracking-wide text-stone-600 hover:text-stone-900 border-b border-stone-400 hover:border-stone-900 pb-1 transition-colors"
+                    disabled={submitting}
+                    className="font-sans text-sm tracking-wide text-stone-600 hover:text-stone-900 border-b border-stone-400 hover:border-stone-900 pb-1 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {submitting ? 'Sending…' : 'Send Message'}
                   </button>
                 </form>
               )}
