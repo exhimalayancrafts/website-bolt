@@ -4,7 +4,7 @@ import PageMeta from '../components/PageMeta';
 
 export default function Manufacturing() {
   const processes = [
-    { stage: 'Fiber Sorting', description: 'Raw fiber arrives at our facility for hand-sorting. Experienced graders separate fibers by color, length, and fineness, removing impurities and ensuring consistent quality.', key_points: ['Hand sorting by trained graders', 'Color and quality separation', 'Contamination removal', 'Lot tracking begins'] },
+    { stage: 'Fiber Sorting', description: 'Raw fiber arrives at the facility for hand-sorting. Experienced graders separate fibers by color, length, and fineness, removing impurities and ensuring consistent quality.', key_points: ['Hand sorting by trained graders', 'Color and quality separation', 'Contamination removal', 'Lot tracking begins'] },
     { stage: 'Carding', description: 'Fibers are opened, aligned, and cleaned through carding machines. This process removes remaining impurities and prepares fiber for spinning.', key_points: ['Mechanical carding', 'Fiber alignment', 'Further cleaning', 'Sliver formation'] },
     { stage: 'Spinning', description: 'Carded fiber is spun into yarn using both traditional hand-spinning for premium lines and machine spinning for consistency in larger volumes.', key_points: ['Hand spinning for fine yarns', 'Machine spinning for consistency', 'Multiple yarn weights', 'Twist specification'] },
     { stage: 'Weaving', description: 'Yarn is woven into fabric on handlooms and powerlooms. Weaving patterns, tension, and density are controlled to specification.', key_points: ['Handloom weaving', 'Powerloom capability', 'Pattern development', 'Quality monitoring'] },
@@ -35,7 +35,7 @@ export default function Manufacturing() {
               <p className="font-sans text-[10px] tracking-widest uppercase text-stone-500 mb-5">Facilities</p>
               <h2 className="font-serif text-2xl md:text-3xl font-light text-stone-900 mb-6 leading-snug">Owned production, direct control.</h2>
               <p className="font-sans text-base text-stone-600 leading-relaxed mb-4">
-                <SiteText page="manufacturing" slot="facility-body" defaultContent="Unlike many operators who outsource manufacturing, we own our facilities in Kathmandu Valley. This allows us to control quality at every stage, ensure fair working conditions, and maintain consistent standards." />
+                <SiteText page="manufacturing" slot="facility-body" defaultContent="We own our facilities in Kathmandu Valley. We control quality at every stage, ensure fair working conditions, and maintain consistent standards." />
               </p>
               <p className="font-sans text-base text-stone-600 leading-relaxed">
                 Our workshops combine traditional handwork with quality-controlled modern processes. Hand-spinning zones sit alongside machine carding lines. Handlooms operate in parallel with finishing equipment.
@@ -104,7 +104,7 @@ export default function Manufacturing() {
                 Every production lot passes through quality checkpoints: fiber testing, yarn inspection, fabric grading, and final product review.
               </p>
               <p className="font-sans text-base text-stone-300 leading-relaxed">
-                This systematic approach — combined with the skill of experienced artisans — ensures that finished products meet specifications and last for years of use.
+                This systematic approach combined with the skill of experienced artisans ensures that finished products meet specifications and last for years of use.
               </p>
             </div>
             <SiteImage page="manufacturing" slot="quality" fallbackLabel="Quality inspection" aspect="aspect-[4/3]" className="rounded-sm opacity-70" />
