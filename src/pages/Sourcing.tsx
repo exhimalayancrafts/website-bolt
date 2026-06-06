@@ -6,15 +6,15 @@ export default function Sourcing() {
   const sources = [
     {
       fiber: 'Cashmere',
-      region: 'High-altitude plateaus of Dolpa and Mustang districts',
+      region: 'High-altitude plateaus of Dolpa and Mustang',
       animals: 'Chyangra goats, adapted to 4,000+ meter elevations',
       season: 'Spring combing season (March–May)',
       slot: 'cashmere-source',
-      description: 'Cashmere fiber is harvested through careful combing during the spring molt, when goats naturally shed their winter undercoat. We work with herding families who have maintained these breeds for generations, following protocols that protect animal health and fiber quality.',
+      description: 'Chyangra goats live at elevations above 4,000 meters, where the cold winters push them to grow the fine undercoat that cashmere comes from. During spring, when the animals naturally begin to shed, herding families comb rather than shear which is a slower process that protects both the animal and the fiber.  We work with herding families who have maintained these breeds for generations, following protocols that protect animal health and fiber quality.',
     },
     {
-      fiber: 'Yak Wool',
-      region: 'Northern Himalayan valleys and Tibetan border areas',
+      fiber: 'Yak Wool - Khullu',
+      region: 'Mustang',
       animals: 'Chauri and pure yak herds',
       season: 'Spring harvest (April–June)',
       slot: 'yak-source',
@@ -26,10 +26,10 @@ export default function Sourcing() {
       animals: 'Local mountain breeds and crossbreeds',
       season: 'Annual shearing (usually pre-monsoon)',
       slot: 'sheep-source',
-      description: 'Sheep are shorn annually, with wool quality varying by breed and grazing conditions. We work with shepherd communities who maintain traditional transhumance routes, moving flocks seasonally between grazing areas.',
+      description: 'Sheep are shorn annually, with wool quality varying by breed and grazing conditions. We work with shepherd communities who move their flocks seasonally between grazing areas.',
     },
     {
-      fiber: 'Allo',
+      fiber: 'Himalayan Nettle - Allo',
       region: 'Community forests in mid-hill regions',
       animals: 'Girardinia diversifolia (wild Himalayan nettle)',
       season: 'Harvest cycle aligned with plant maturity',
@@ -61,7 +61,7 @@ export default function Sourcing() {
             </div>
             <div className="lg:col-span-7">
               <p className="font-sans text-base text-stone-600 leading-relaxed mb-4">
-                  <SiteText page="sourcing" slot="approach-body" defaultContent="We source fiber directly from herding families and community groups, maintaining personal knowledge of animals, grazing practices, and harvest methods. This direct relationship allows genuine traceability and fair terms." />
+                  <SiteText page="sourcing" slot="approach-body" defaultContent="We source fiber directly from herding families and community groups, maintaining personal knowledge of animals, grazing practices, and harvest methods allowing us genuine traceability and fair terms." />
                 </p>
               <p className="font-sans text-base text-stone-600 leading-relaxed">
                   Each fiber type comes from a distinct environment with its own climate, seasonality, and traditional knowledge. Understanding these origins is essential to producing quality textiles.
@@ -114,10 +114,10 @@ export default function Sourcing() {
               <p className="font-sans text-[10px] tracking-widest uppercase text-stone-400 mb-5">Traceability</p>
               <h2 className="font-serif text-2xl md:text-3xl font-light text-stone-100 mb-6 leading-snug">Knowing the origin.</h2>
               <p className="font-sans text-base text-stone-300 leading-relaxed mb-4">
-                We maintain records connecting each fiber lot to its source — the herder, the region, the season. This traceability is not a marketing claim but a working practice.
+                We maintain records connecting each fiber lot to its source; the herder, the region, the season to ensure traceability.
               </p>
               <p className="font-sans text-base text-stone-300 leading-relaxed">
-                When you handle our textiles, you are handling material with a known lineage — from specific animals and landscapes to finished product.
+                When you handle our textiles, you are handling material with a known lineage from specific animals and landscapes to finished product.
               </p>
             </div>
           </div>
@@ -133,7 +133,7 @@ export default function Sourcing() {
             </div>
             <div className="lg:col-span-7">
               <p className="font-sans text-base text-stone-600 leading-relaxed mb-4">
-                Our herding partners follow practices that prioritize animal health: proper nutrition, seasonal grazing rotation, and low-stress handling. Cashmere harvesting uses combing rather than shearing during the natural molt.
+                Our herding families follow practices that prioritize animal health: proper nutrition, seasonal grazing rotation, and low-stress handling.
               </p>
               <SiteImage page="sourcing" slot="welfare-goats" fallbackLabel="Healthy goats grazing" aspect="aspect-video" className="rounded-sm mt-6" />
             </div>
@@ -146,7 +146,7 @@ export default function Sourcing() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-10">
             <p className="font-sans text-[10px] tracking-widest uppercase text-stone-500 mb-4">From the Field</p>
-            <h2 className="font-serif text-2xl md:text-3xl font-light text-stone-900">Sourcing in context</h2>
+            <h2 className="font-serif text-2xl md:text-3xl font-light text-stone-900">Sourcing </h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {(['field-1','field-2','field-3','field-4'] as const).map((slot, i) => (
