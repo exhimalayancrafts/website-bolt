@@ -98,7 +98,7 @@ export default function Fibers() {
       <section className="py-20 px-6 lg:px-12 bg-stone-900 text-stone-100">
         <div className="max-w-6xl mx-auto">
           <div className="mb-10">
-            <p className="font-sans text-[10px] tracking-widest uppercase text-stone-400 mb-4">Material Studies</p>
+            <p className="font-sans text-[10px] tracking-widest uppercase text-stone-400 mb-4"> </p>
             <h2 className="font-serif text-2xl md:text-3xl font-light text-stone-100">Fiber in detail</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -119,10 +119,10 @@ export default function Fibers() {
             <div className="lg:col-span-7">
               <h2 className="font-serif text-xl md:text-2xl font-light text-stone-900 mb-6 leading-snug">Natural fibers adapted to harsh conditions.</h2>
               <p className="font-sans text-base text-stone-600 leading-relaxed mb-4">
-                The fibers we work with evolved in some of the world's most challenging environments. This makes them inherently resilient — capable of withstanding extreme cold, regulating temperature, and lasting for decades with proper care.
+                Cashmere goats, yaks, and mountain sheep have lived at altitude for thousands of years, developing coats that insulate, regulate, and breathe naturally. These qualities come from animals and landscapes shaping each other over a very long time not from any manufacturing process. 
               </p>
               <p className="font-sans text-base text-stone-600 leading-relaxed">
-                As climate patterns shift, these time-tested materials offer a sustainable alternative to petroleum-based synthetics. Natural fibers biodegrade at end of life, returning to the soil rather than accumulating as waste.
+                As the pressure to replace natural materials grows, we think there's something worth holding onto here. Fibers that come from the land, and return to it.
               </p>
             </div>
           </div>
