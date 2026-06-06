@@ -111,10 +111,10 @@ export default function Home() {
                 className="rounded-sm mb-6"
               />
               <p className="font-sans text-base text-stone-600 leading-relaxed mb-5">
-                Fibers begin in the mountains — in the high plateaus where cashmere goats grow their down coats against sub-zero winters, in the valleys where sheep graze on natural pasture, in the remote regions where yaks have adapted to extremes for millennia.
-              </p>
+                Our fibers come from the Himalayan highlands — from cashmere goats, sheep, and yaks raised by herding families in some of the region's most remote areas.
               <p className="font-sans text-base text-stone-600 leading-relaxed">
-                We source directly from these environments, maintaining relationships with herding families and communities who have worked these lands for generations.
+                We source directly from these communities and have maintained these relationships for decades.
+              </p>
               </p>
               <Link to="/sourcing" className="inline-block font-sans text-sm text-stone-700 hover:text-stone-900 mt-6 transition-colors">
                 View sourcing process →
@@ -134,7 +134,7 @@ export default function Home() {
               <SiteImage
                 page="home"
                 slot="manufacturing-workshop"
-                fallbackLabel="Weaving workshop — looms and artisans"
+                fallbackLabel="Weaving workshop : looms and artisans"
                 aspect="aspect-[4/3]"
                 className="rounded-sm opacity-80"
               />
@@ -145,7 +145,7 @@ export default function Home() {
                 Crafted in our own workshops.
               </h2>
               <p className="font-sans text-base text-stone-300 leading-relaxed mb-6">
-                We own and operate our manufacturing facilities in Kathmandu, combining traditional handwork with quality-controlled modern processes. Every stage — from fiber sorting to finishing — happens under our direct oversight.
+                We own and operate our manufacturing facilities in Kathmandu, combining traditional handwork with quality-controlled modern processes. Every stage from fiber sorting to finishing happens under our direct oversight.
               </p>
               <Link to="/manufacturing" className="inline-block font-sans text-sm text-stone-300 hover:text-stone-100 transition-colors">
                 See manufacturing →
@@ -172,7 +172,7 @@ export default function Home() {
                 Made by hands that know the work.
               </h2>
               <p className="font-sans text-base text-stone-600 leading-relaxed mb-6">
-                Our artisan community spans generations — women and men who learned fiber work from their parents and are now passing it to their children.
+                Our artisan community spans generations from women and men who learned fiber work from their parents and are now passing it to their children.
               </p>
               <Link to="/community" className="inline-block font-sans text-sm text-stone-700 hover:text-stone-900 transition-colors">
                 Meet the community →
@@ -186,7 +186,7 @@ export default function Home() {
       <section className="py-16 px-6 lg:px-12 bg-stone-100">
         <div className="max-w-2xl mx-auto text-center">
           <p className="font-sans text-base text-stone-600 leading-relaxed">
-            Exclusive Crafts works at the intersection of landscape, fiber, and human skill — producing textiles that reflect the integrity of their origin.
+            Exclusive Crafts works at the intersection of landscape, fiber, and human skill.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
             <SiteLink page="home" slot="cta-primary" defaultHref="/products" defaultLinkText="View Products"
