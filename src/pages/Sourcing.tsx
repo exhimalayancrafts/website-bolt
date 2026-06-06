@@ -47,7 +47,7 @@ export default function Sourcing() {
           <p className="font-sans text-[10px] tracking-widest uppercase text-stone-500 mb-4">Origins</p>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-stone-900 mb-5 leading-tight">Sourcing</h1>
           <p className="font-sans text-base text-stone-600 max-w-2xl leading-relaxed">
-            <SiteText page="sourcing" slot="page-intro" defaultContent="How and where we obtain our fibers — the landscapes, animals, and communities at the beginning of the supply chain." />
+            <SiteText page="sourcing" slot="page-intro" defaultContent="How and where we obtain our fibers: the landscapes, animals, and communities at the beginning of the supply chain." />
           </p>
         </div>
       </section>
