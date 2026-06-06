@@ -5,7 +5,7 @@ import PageMeta from '../components/PageMeta';
 export default function About() {
   const milestones = [
     { year: '1998', title: 'Founding', description: 'Established in Kathmandu with a focus on cashmere export and direct sourcing relationships.' },
-    { year: 'Early Growth', title: 'International Market Development', description: 'Expanded global presence through participation in major international trade fairs across North America, Europe, and Asia, including AmericasMart Atlanta, ASD Market Week Las Vegas, Off Price Show Las Vegas, LA Mart Los Angeles, Sourcing at MAGIC New York, CNE Toronto, MUBA Basel, California Gift Show, San Francisco International Gift Fair, and numerous European trade exhibitions.' },
+    { year: 'Early Growth', title: 'International Market Development', description: 'Expanded global presence through participation in major international trade fairs across North America, Europe, and Asia.' },
     { year: '2021', title: 'Cashmere Processing Development', description: "Became part of Nepal's first cashmere fiber processing initiative, allowing Chyangra Pashmina to be sourced and processed domestically." },
     { year: '2023', title: 'Natural Fiber Expansion', description: 'Expanded sourcing and product development across a broader range of plant based fibers, including himalayan nettle (allo) and hemp.' },
     { year: 'Present', title: 'Current Operations', description: 'Providing sourcing, development, manufacturing, and export solutions across natural fibers for clients around the world.' },
@@ -49,10 +49,10 @@ export default function About() {
                   Dhan Prasad Lamichhane founded Exclusive Crafts, formerly known as Mount Manaslu Pashmina Industry, in 1998, starting with cashmere export and building direct relationships with clients across the world. Over 25 years the business has grown into a trusted supplier to international brands worldwide.
                 </p>
                 <p className="font-sans text-base text-stone-600 leading-relaxed">
-                  He established Nepal's first cashmere dehairing facility through NFPPL (Nepal Fibre Processing Private Limited), with support from ITC's EU-Nepal Trade and Investment Programme. The facility was built with a single goal: to allow Nepalese cashmere to be processed locally and reach world markets on its own terms.
+                  He established Nepal's first cashmere dehairing facility through NFPPL (Nepal Fibre Processing Private Limited), with support from ITC's EU-Nepal Trade and Investment Programme allowing Nepalese cashmere to be processed locally and reach world markets on its own terms.
                 </p>
                 <p className="font-sans text-base text-stone-600 leading-relaxed">
-                  His background is in dyeing with a long focus on vegetable dye techniques. Since 2002 he has been involved in promoting Nepalese handicrafts internationally. He currently serves as President of Nepal Pashmina Industries Association, is a founding member of NFPPL, and sits on the board of the Federation of Handicrafts Associations of Nepal. He also founded Jorpati Lions Academy, a school for underprivileged children in Kathmandu.
+                  His background is in dyeing with a long focus on vegetable dye techniques. Since 2002 he has been involved in promoting Nepalese handicrafts internationally. He serves as President of Nepal Pashmina Industries Association, is a founding member of NFPPL, and sits on the board of the Federation of Handicrafts Associations of Nepal. He also founded Jorpati Lions Academy, a school for underprivileged children in Kathmandu.
                 </p>
                 <a
                   href="https://www.intracen.org/news-and-events/news/pashmina-from-nepal-a-unique-product-ready-to-embrace-international-markets"
@@ -93,9 +93,9 @@ export default function About() {
                   </p>
                 </div>
                 <div className="border-l border-stone-400 pl-8">
-                  <h3 className="font-serif text-lg font-medium text-stone-900 mb-3">Experience</h3>
+                  <h3 className="font-serif text-lg font-medium text-stone-900 mb-3">Stewardship</h3>
                   <p className="font-sans text-base text-stone-600 leading-relaxed">
-                    Dhan has been working with pashmina since he was a teenager. The business has been running since 1998. That kind of experience shows in the work.
+                     No land, no fiber. We work in ways that keep the highlands and the communities on them healthy.
                   </p>
                 </div>
               </div>
@@ -136,7 +136,7 @@ export default function About() {
               </h2>
               <div className="space-y-6">
                 <p className="font-sans text-base text-stone-300 leading-relaxed">
-                  Over 25 years, we have built relationships across the global textile industry — participating in trade associations, contributing to sustainability standards, and collaborating with research institutions on fiber development.
+                  Over 25 years, we have built relationships across the global textile industry, participating in trade associations, contributing to sustainability standards, and collaborating with research institutions on fiber development.
                 </p>
                 <div className="space-y-3 pt-6 border-t border-stone-700">
                   <p className="font-sans text-xs text-stone-400">Active membership and participation in:</p>
