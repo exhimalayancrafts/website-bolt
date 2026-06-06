@@ -4,12 +4,12 @@ import PageMeta from '../components/PageMeta';
 import { Link } from 'react-router-dom';
 
 const collections = [
-  { name: 'Scarves', description: 'Lightweight scarves in cashmere and blended fibers, suited to transitional seasons and everyday wear.', fibers: 'Cashmere, Cashmere-Silk blend, Yak-Sheep blend' },
+  { name: 'Scarves', description: 'Lightweight scarves in cashmere and blended fibers, easy to wear across seasons, and a good introduction to what Himalayan fiber feels like against the skin.', fibers: 'Cashmere, Cashmere-Silk blend, Yak-Sheep blend' },
   { name: 'Shawls', description: 'Larger-format pieces providing warmth and versatility, from fine cashmere to substantial wool weaves.', fibers: 'Pure Cashmere, Yak Wool, Sheep Wool' },
   { name: 'Throws', description: 'Oversized blankets and throws for home use, showcasing the full character of natural fibers.', fibers: 'Heavy Cashmere, Yak-Sheep blend, Wool' },
   { name: 'Woven Textiles', description: 'Fabric by the yard for designers and manufacturers, available in various weights and compositions.', fibers: 'All fiber types, custom blends available' },
   { name: 'Wool Accessories', description: 'Smaller items including hats, gloves, and socks in durable wool constructions.', fibers: 'Sheep Wool, Yak Wool' },
-  { name: 'Allo Fiber Products', description: 'Emerging products using Himalayan nettle — bags, home textiles, and experimental pieces.', fibers: 'Pure Allo, Allo-Cotton blend' },
+  { name: 'Allo Fiber Products', description: 'Himalayan nettle is one of the oldest fibers in Nepal, and one of the least known outside it. Emerging products using Himalayan nettle: bags, home textiles, and experimental pieces.', fibers: 'Pure Allo, Allo-Cotton blend' },
 ];
 
 export default function Products() {
