@@ -1,0 +1,8 @@
+[functions.admin-auth]
+verify_jwt = false
+
+[functions.admin-submissions]
+verify_jwt = false
+
+[functions.contact-form]
+verify_jwt = false

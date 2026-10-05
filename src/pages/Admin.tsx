@@ -4,7 +4,7 @@ import { IMAGE_SLOTS, type ImageSlot } from '../lib/imageSlots';
 import { TEXT_SLOTS, type TextSlot } from '../lib/textSlots';
 import { VIDEO_SLOTS, type VideoSlot } from '../lib/videoSlots';
 import { LINK_SLOTS, type LinkSlot } from '../lib/linkSlots';
-import { Upload, Trash2, CheckCircle, AlertCircle, Loader, Lock, Image, Type, Video, Link2, Save, Inbox, Mail, Building2, ChevronDown, ChevronUp } from 'lucide-react';
+import { Upload, Trash2, CheckCircle, AlertCircle, Loader, Lock, Image, Type, Video, Link2, Save, Inbox, Mail, Building2, ChevronDown, ChevronUp, Pencil, X } from 'lucide-react';
 
 interface UploadedImage { id: string; page: string; slot: string; label: string; storage_path: string; }
 interface SavedText { id: string; page: string; slot: string; content: string; }
@@ -522,6 +522,7 @@ interface Submission {
 }
 
 const INTEREST_LABELS: Record<string, string> = {
+  '': 'General',
   wholesale: 'Wholesale Inquiry',
   partnership: 'Partnership',
   product: 'Product Information',
@@ -534,6 +535,9 @@ function SubmissionsTab({ adminPassword }: { adminPassword: string }) {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [editing, setEditing] = useState<string | null>(null);
+  const [editDraft, setEditDraft] = useState<Partial<Submission>>({});
+  const [savingEdit, setSavingEdit] = useState(false);
   const [status, setStatus] = useState<Status>(null);
 
   const apiHeaders = {
@@ -570,6 +574,45 @@ function SubmissionsTab({ adminPassword }: { adminPassword: string }) {
     setSubmissions((prev) => prev.map((s) => s.id === sub.id ? { ...s, is_read: next } : s));
   }
 
+  function startEdit(sub: Submission) {
+    setEditing(sub.id);
+    setEditDraft({ name: sub.name, email: sub.email, company: sub.company, role: sub.role, interest: sub.interest, message: sub.message });
+  }
+
+  function cancelEdit() {
+    setEditing(null);
+    setEditDraft({});
+  }
+
+  async function saveEdit(sub: Submission) {
+    const draft = editDraft;
+    if (!draft.name?.trim()) { showStatus('error', 'Name cannot be empty'); return; }
+    if (!draft.email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(draft.email.trim())) { showStatus('error', 'Valid email is required'); return; }
+    if (!draft.message?.trim()) { showStatus('error', 'Message cannot be empty'); return; }
+
+    setSavingEdit(true);
+    try {
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/admin-submissions?id=${sub.id}`, {
+        method: 'PATCH',
+        headers: apiHeaders,
+        body: JSON.stringify(draft),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        showStatus('error', err.error || 'Could not save changes');
+        return;
+      }
+      setSubmissions((prev) => prev.map((s) => s.id === sub.id ? { ...s, ...draft } as Submission : s));
+      setEditing(null);
+      setEditDraft({});
+      showStatus('success', 'Submission updated');
+    } catch {
+      showStatus('error', 'Could not save changes');
+    } finally {
+      setSavingEdit(false);
+    }
+  }
+
   async function deleteSubmission(id: string) {
     const res = await fetch(`${SUPABASE_URL}/functions/v1/admin-submissions?id=${id}`, {
       method: 'DELETE',
@@ -578,6 +621,7 @@ function SubmissionsTab({ adminPassword }: { adminPassword: string }) {
     if (!res.ok) { showStatus('error', 'Could not delete'); return; }
     setSubmissions((prev) => prev.filter((s) => s.id !== id));
     if (expanded === id) setExpanded(null);
+    if (editing === id) cancelEdit();
     showStatus('success', 'Submission deleted');
   }
 
@@ -635,42 +679,107 @@ function SubmissionsTab({ adminPassword }: { adminPassword: string }) {
                 {/* Expanded detail */}
                 {expanded === sub.id && (
                   <div className="border-t border-stone-100 px-5 py-5 bg-stone-50 space-y-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {sub.company && (
-                        <div>
-                          <p className="font-sans text-[10px] uppercase tracking-widest text-stone-400 mb-1 flex items-center gap-1.5"><Building2 className="w-3 h-3" /> Company</p>
-                          <p className="font-sans text-sm text-stone-700">{sub.company}{sub.role ? ` — ${sub.role}` : ''}</p>
+                    {editing === sub.id ? (
+                      <>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div>
+                            <label className="font-sans text-[10px] uppercase tracking-widest text-stone-400 mb-1 block">Name</label>
+                            <input type="text" value={editDraft.name ?? ''} onChange={(e) => setEditDraft((p) => ({ ...p, name: e.target.value }))}
+                              className="w-full font-sans text-sm text-stone-800 bg-white border border-stone-200 focus:border-stone-400 focus:outline-none p-2.5" />
+                          </div>
+                          <div>
+                            <label className="font-sans text-[10px] uppercase tracking-widest text-stone-400 mb-1 block">Email</label>
+                            <input type="email" value={editDraft.email ?? ''} onChange={(e) => setEditDraft((p) => ({ ...p, email: e.target.value }))}
+                              className="w-full font-sans text-sm text-stone-800 bg-white border border-stone-200 focus:border-stone-400 focus:outline-none p-2.5" />
+                          </div>
+                          <div>
+                            <label className="font-sans text-[10px] uppercase tracking-widest text-stone-400 mb-1 block">Company</label>
+                            <input type="text" value={editDraft.company ?? ''} onChange={(e) => setEditDraft((p) => ({ ...p, company: e.target.value }))}
+                              className="w-full font-sans text-sm text-stone-800 bg-white border border-stone-200 focus:border-stone-400 focus:outline-none p-2.5" />
+                          </div>
+                          <div>
+                            <label className="font-sans text-[10px] uppercase tracking-widest text-stone-400 mb-1 block">Role</label>
+                            <input type="text" value={editDraft.role ?? ''} onChange={(e) => setEditDraft((p) => ({ ...p, role: e.target.value }))}
+                              className="w-full font-sans text-sm text-stone-800 bg-white border border-stone-200 focus:border-stone-400 focus:outline-none p-2.5" />
+                          </div>
+                          <div>
+                            <label className="font-sans text-[10px] uppercase tracking-widest text-stone-400 mb-1 block">Interest</label>
+                            <select value={editDraft.interest ?? ''} onChange={(e) => setEditDraft((p) => ({ ...p, interest: e.target.value }))}
+                              className="w-full font-sans text-sm text-stone-800 bg-white border border-stone-200 focus:border-stone-400 focus:outline-none p-2.5">
+                              <option value="">General</option>
+                              <option value="wholesale">Wholesale Inquiry</option>
+                              <option value="partnership">Partnership</option>
+                              <option value="product">Product Information</option>
+                              <option value="sourcing">Sourcing Details</option>
+                              <option value="press">Press & Media</option>
+                              <option value="other">Other</option>
+                            </select>
+                          </div>
                         </div>
-                      )}
-                      <div>
-                        <p className="font-sans text-[10px] uppercase tracking-widest text-stone-400 mb-1 flex items-center gap-1.5"><Mail className="w-3 h-3" /> Email</p>
-                        <a href={`mailto:${sub.email}`} className="font-sans text-sm text-stone-700 hover:text-stone-900 underline underline-offset-2 transition-colors">{sub.email}</a>
-                      </div>
-                    </div>
-                    <div>
-                      <p className="font-sans text-[10px] uppercase tracking-widest text-stone-400 mb-2">Message</p>
-                      <p className="font-sans text-sm text-stone-700 leading-relaxed whitespace-pre-wrap">{sub.message}</p>
-                    </div>
-                    <div className="flex items-center gap-3 pt-1">
-                      <button
-                        onClick={() => markRead(sub)}
-                        className="font-sans text-xs text-stone-500 hover:text-stone-800 border border-stone-300 hover:border-stone-500 px-3 py-1.5 transition-colors"
-                      >
-                        {sub.is_read ? 'Mark unread' : 'Mark read'}
-                      </button>
-                      <a
-                        href={`mailto:${sub.email}?subject=Re: ${encodeURIComponent(sub.interest ? (INTEREST_LABELS[sub.interest] ?? sub.interest) : 'Your Inquiry')}`}
-                        className="font-sans text-xs text-stone-100 bg-stone-900 hover:bg-stone-700 px-3 py-1.5 transition-colors"
-                      >
-                        Reply by email
-                      </a>
-                      <button
-                        onClick={() => deleteSubmission(sub.id)}
-                        className="font-sans text-xs text-red-500 hover:text-red-700 ml-auto transition-colors"
-                      >
-                        Delete
-                      </button>
-                    </div>
+                        <div>
+                          <label className="font-sans text-[10px] uppercase tracking-widest text-stone-400 mb-1 block">Message</label>
+                          <textarea value={editDraft.message ?? ''} onChange={(e) => setEditDraft((p) => ({ ...p, message: e.target.value }))}
+                            rows={Math.max(3, (editDraft.message ?? '').split('\n').length + 1)}
+                            className="w-full font-sans text-sm text-stone-800 bg-white border border-stone-200 focus:border-stone-400 focus:outline-none p-3 resize-y leading-relaxed" />
+                        </div>
+                        <div className="flex items-center gap-3 pt-1">
+                          <button onClick={() => saveEdit(sub)} disabled={savingEdit}
+                            className="flex items-center gap-1.5 font-sans text-xs text-stone-100 bg-stone-900 hover:bg-stone-700 px-3 py-1.5 transition-colors disabled:opacity-50">
+                            {savingEdit ? <Loader className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
+                            {savingEdit ? 'Saving…' : 'Save changes'}
+                          </button>
+                          <button onClick={cancelEdit}
+                            className="flex items-center gap-1.5 font-sans text-xs text-stone-500 hover:text-stone-800 border border-stone-300 hover:border-stone-500 px-3 py-1.5 transition-colors">
+                            <X className="w-3.5 h-3.5" /> Cancel
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          {sub.company && (
+                            <div>
+                              <p className="font-sans text-[10px] uppercase tracking-widest text-stone-400 mb-1 flex items-center gap-1.5"><Building2 className="w-3 h-3" /> Company</p>
+                              <p className="font-sans text-sm text-stone-700">{sub.company}{sub.role ? ` — ${sub.role}` : ''}</p>
+                            </div>
+                          )}
+                          <div>
+                            <p className="font-sans text-[10px] uppercase tracking-widest text-stone-400 mb-1 flex items-center gap-1.5"><Mail className="w-3 h-3" /> Email</p>
+                            <a href={`mailto:${sub.email}`} className="font-sans text-sm text-stone-700 hover:text-stone-900 underline underline-offset-2 transition-colors">{sub.email}</a>
+                          </div>
+                        </div>
+                        <div>
+                          <p className="font-sans text-[10px] uppercase tracking-widest text-stone-400 mb-2">Message</p>
+                          <p className="font-sans text-sm text-stone-700 leading-relaxed whitespace-pre-wrap">{sub.message}</p>
+                        </div>
+                        <div className="flex items-center gap-3 pt-1">
+                          <button
+                            onClick={() => markRead(sub)}
+                            className="font-sans text-xs text-stone-500 hover:text-stone-800 border border-stone-300 hover:border-stone-500 px-3 py-1.5 transition-colors"
+                          >
+                            {sub.is_read ? 'Mark unread' : 'Mark read'}
+                          </button>
+                          <button
+                            onClick={() => startEdit(sub)}
+                            className="flex items-center gap-1.5 font-sans text-xs text-stone-500 hover:text-stone-800 border border-stone-300 hover:border-stone-500 px-3 py-1.5 transition-colors"
+                          >
+                            <Pencil className="w-3.5 h-3.5" /> Edit
+                          </button>
+                          <a
+                            href={`mailto:${sub.email}?subject=Re: ${encodeURIComponent(sub.interest ? (INTEREST_LABELS[sub.interest] ?? sub.interest) : 'Your Inquiry')}`}
+                            className="font-sans text-xs text-stone-100 bg-stone-900 hover:bg-stone-700 px-3 py-1.5 transition-colors"
+                          >
+                            Reply by email
+                          </a>
+                          <button
+                            onClick={() => deleteSubmission(sub.id)}
+                            className="font-sans text-xs text-red-500 hover:text-red-700 ml-auto transition-colors"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </>
+                    )}
                   </div>
                 )}
               </div>

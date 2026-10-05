@@ -20,7 +20,6 @@ Deno.serve(async (req: Request) => {
   }
 
   try {
-    // Verify admin password from header
     const adminPassword = Deno.env.get("ADMIN_PASSWORD");
     const provided = req.headers.get("X-Admin-Password");
     if (!adminPassword || provided !== adminPassword) {
@@ -46,9 +45,44 @@ Deno.serve(async (req: Request) => {
 
     if (req.method === "PATCH" && id) {
       const body = await req.json();
+
+      // If only is_read is provided, toggle read status (original behavior)
+      if (body.is_read !== undefined && body.name === undefined && body.email === undefined && body.company === undefined && body.role === undefined && body.interest === undefined && body.message === undefined) {
+        const { error } = await supabase
+          .from("contact_submissions")
+          .update({ is_read: body.is_read })
+          .eq("id", id);
+        if (error) return json({ error: error.message }, 500);
+        return json({ ok: true });
+      }
+
+      // Full edit mode — update all provided fields with validation
+      const update: Record<string, string | boolean> = {};
+
+      if (body.is_read !== undefined) update.is_read = !!body.is_read;
+
+      if (body.name !== undefined) {
+        const val = String(body.name).slice(0, 100).trim();
+        if (val.length === 0) return json({ error: "Name cannot be empty" }, 400);
+        update.name = val;
+      }
+      if (body.email !== undefined) {
+        const val = String(body.email).slice(0, 200).trim().toLowerCase();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) return json({ error: "Valid email is required" }, 400);
+        update.email = val;
+      }
+      if (body.company !== undefined) update.company = String(body.company).slice(0, 200).trim();
+      if (body.role !== undefined) update.role = String(body.role).slice(0, 100).trim();
+      if (body.interest !== undefined) update.interest = String(body.interest).slice(0, 50).trim();
+      if (body.message !== undefined) {
+        const val = String(body.message).slice(0, 2000).trim();
+        if (val.length === 0) return json({ error: "Message cannot be empty" }, 400);
+        update.message = val;
+      }
+
       const { error } = await supabase
         .from("contact_submissions")
-        .update({ is_read: body.is_read })
+        .update(update)
         .eq("id", id);
       if (error) return json({ error: error.message }, 500);
       return json({ ok: true });
